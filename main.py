@@ -106,6 +106,7 @@ if __name__ == '__main__':
     #    timestamp - the Unix timestmap of the event
     #    X - The x-position of the event
     #    Y - The y-position of the event
+    #    button - The type of button pressed (left, right, middle, etc..)
     #    duration - The duration of the event, for example, how long the subject held down the left mouse button
     with open(os.path.join(data_directory, output_file), "w") as file:
         file.write("ID,Timestamp,X,Y,Button,Duration")
