@@ -18,6 +18,13 @@ def on_click(x, y, button, pressed):
     else:
         print("Released at: ", end=" ")
 
+    if str(button) == "Button.left":
+        print("CLicked Left")
+    elif str(button) == "Button.right":
+        print("CLicked Right")
+    else:
+        print("CLicked Medium")
+
     print(f"({x}, {y}), {button = }")
 
 
