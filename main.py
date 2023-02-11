@@ -2,19 +2,17 @@ import os.path
 from pynput import mouse
 import time
 
-duration = 3  # 60 * 30  # 60 seconds * 30 minutes
-
-user_id = 0  # update for each user
-start_position: (int, int) = (0, 0)
+# Duration for data collection
+duration = 60  # 60 * 30  # 60 seconds * 30 minutes
+user_id = "test_user"  # update for each user
+start_position = (0, 0)
 
 
 def on_move(x, y):
     # On move, log the current position and set the other data cells to -1 to denote an invalid value (we don't need
     # button pressed or duration for just a single move event)
-    current_time = time.time()
-
     with open(os.path.join(data_directory, output_file), "a") as data_file:
-        data_file.write(f"\n{user_id},{current_time},{x},{y},-1,-1")
+        data_file.write(f"\n{user_id},{time.time()},{x},{y},-1,-1")
     listener.stop()
 
 
@@ -42,16 +40,14 @@ def on_click(x, y, button, pressed):
         "Button.left": 0,
         "Button.right": 1,
         "Button.middle": 2,
-        "Button.x1": 5,  # Might not use
-        "Button.x2": 6,  # Might not use
+        # "Button.x1": 5,  # Might not use
+        # "Button.x2": 6,  # Might not use
     }
 
     button = button_map[str(button)]
 
-    current_time = time.time()
-
     with open(os.path.join(data_directory, output_file), "a") as data_file:
-        data_file.write(f"\n{user_id},{current_time},{x},{y},{button},-1")
+        data_file.write(f"\n{user_id},{time.time()},{x},{y},{button},-1")
     listener.stop()
 
 
@@ -72,10 +68,8 @@ def on_scroll(x, y, dx, dy):
     else:
         button = 3
 
-    current_time = time.time()
-
     with open(os.path.join(data_directory, output_file), "a") as data_file:
-        data_file.write(f"\n{user_id},{current_time},{x},{y},{button},-1")
+        data_file.write(f"\n{user_id},{time.time()},{x},{y},{button},-1")
 
     listener.stop()
 
@@ -115,12 +109,11 @@ if __name__ == '__main__':
     delay = 3
     print(f"{delay} seconds until mouse events are recorded...")
     time.sleep(delay)
+    print("Starting data collection now.")
     # Set the starting position
     start_position = mouse.Controller().position
 
-    start = time.time()
-    end = start + duration
-    print(f"{start = } {end = }")
+    end = time.time() + duration
 
     # Start listening for events. Main loop
     while time.time() < end:
@@ -128,4 +121,4 @@ if __name__ == '__main__':
             listener.join()
     listener.stop()
 
-    print("Completed!")
+    print("Completed data collection")
