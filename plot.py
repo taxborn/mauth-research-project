@@ -11,7 +11,7 @@ from matplotlib import dates as mpl_dates
 
 def preprocess(df):
     for col in df.columns:
-        if col != "Subject ID":
+        if col != "ID":
             df[col] = preprocessing.normalize([i[:-1] for i in df.values], axis=1)
     df = df.values
     sequential_data = []
