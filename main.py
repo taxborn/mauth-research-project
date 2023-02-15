@@ -3,28 +3,32 @@ from pynput import mouse
 import time
 
 # Duration for data collection
-duration = 60  # 60 * 30  # 60 seconds * 30 minutes
-user_id = "test_user"  # update for each user
-start_position = (0, 0)
+duration = 120  # 60 * 30  # 60 seconds * 30 minutes
+user_id = 99  # update for each user
+global last_press_time
 
 
 def on_move(x, y):
+    event_time = time.time()
     # On move, log the current position and set the other data cells to -1 to denote an invalid value (we don't need
     # button pressed or duration for just a single move event)
     with open(os.path.join(data_directory, output_file), "a") as data_file:
-        data_file.write(f"\n{user_id},{time.time()},{x},{y},-1,-1")
+        data_file.write(f"\n{user_id},{event_time},{x},{y},-1,-1")
     listener.stop()
 
 
 def on_click(x, y, button, pressed):
+    event_time = time.time()
+    click_duration = -1
     # TODO: Get press time, is this something we should keep track of in the data here or for ML classifiers?
     # For example, if we keep track of another header, a boolean like was_pressed "pressed" and "released",
     # we can eliminate the need to calculate how long since the last press on release
+    global last_press_time
+
     if pressed:
-        print("Pressed")
-        # Check if the last press event was released,
+        last_press_time = event_time
     else:
-        print("Released")
+        click_duration = event_time - last_press_time
 
     """
     We will denote the button presses as follows:
@@ -47,11 +51,12 @@ def on_click(x, y, button, pressed):
     button = button_map[str(button)]
 
     with open(os.path.join(data_directory, output_file), "a") as data_file:
-        data_file.write(f"\n{user_id},{time.time()},{x},{y},{button},-1")
+        data_file.write(f"\n{user_id},{event_time},{x},{y},{button},{click_duration}")
     listener.stop()
 
 
 def on_scroll(x, y, dx, dy):
+    event_time = time.time()
     """
     We will denote the button presses as follows:
         3: scrolling down event
@@ -69,7 +74,7 @@ def on_scroll(x, y, dx, dy):
         button = 3
 
     with open(os.path.join(data_directory, output_file), "a") as data_file:
-        data_file.write(f"\n{user_id},{time.time()},{x},{y},{button},-1")
+        data_file.write(f"\n{user_id},{event_time},{x},{y},{button},-1")
 
     listener.stop()
 
@@ -78,8 +83,7 @@ if __name__ == '__main__':
     # Initialize some variables
     output_file = f"user_{user_id}_data_{int(time.time())}.csv"  # adding Unix timestamp to accidental overwrites
     current_directory = os.path.dirname(os.path.realpath(__file__))
-    data_directory = f"{current_directory}\data\\"
-    was_released = False
+    data_directory = f"{current_directory}\\data\\"
 
     # Try to create the data directory
     try:
