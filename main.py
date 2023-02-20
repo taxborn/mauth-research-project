@@ -3,8 +3,8 @@ from pynput import mouse
 import time
 
 # Duration for data collection
-duration = 120  # 60 * 30  # 60 seconds * 30 minutes
-user_id = 99  # update for each user
+duration = 45  # 60 * 30  # 60 seconds * 30 minutes
+user_id = 0  # update for each user
 global last_press_time
 
 
@@ -28,7 +28,11 @@ def on_click(x, y, button, pressed):
     if pressed:
         last_press_time = event_time
     else:
-        click_duration = event_time - last_press_time
+        try:
+            click_duration = event_time - last_press_time
+        except:
+            print("Exception happened when getting last_press_time. Catching.")
+            click_duration = -2
 
     """
     We will denote the button presses as follows:
@@ -44,11 +48,15 @@ def on_click(x, y, button, pressed):
         "Button.left": 0,
         "Button.right": 1,
         "Button.middle": 2,
-        # "Button.x1": 5,  # Might not use
-        # "Button.x2": 6,  # Might not use
+        "Button.x1": 5,  # Might not use
+        "Button.x2": 6,  # Might not use
     }
 
-    button = button_map[str(button)]
+    if str(button) in button_map:
+        button = button_map[str(button)]
+    else:
+        # Undefined button
+        button = -2
 
     with open(os.path.join(data_directory, output_file), "a") as data_file:
         data_file.write(f"\n{user_id},{event_time},{x},{y},{button},{click_duration}")
