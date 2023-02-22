@@ -7,7 +7,8 @@ if __name__ == '__main__':
     pd.set_option('display.max_columns', None)
     pd.set_option('display.width', None)
     # ID,Timestamp,X,Y,Button,Duration
-    file = "data/user_99_data_1676439130.csv"
+    user = 10
+    file = f"data/user_{user}_data.csv"
     test_df = pd.read_csv(file, skiprows=1, names=["ID", "Timestamp", "X", "Y", "Button", "Duration"],
                           usecols=['Timestamp', 'X', 'Y'])
 
@@ -17,10 +18,9 @@ if __name__ == '__main__':
 
     x, y = np.hsplit(test_df, 2)
 
-    plt.plot(x, y, color='#FF0000')
     plt.xlabel('Screen x-coordinates')
     plt.ylabel('Screen y-coordinates')
-    plt.title('Mouse path')
+    plt.title(f"User {user}'s mouse path")
     plt.plot(x, y, color='#67F8A0')
     plt.show()
 
