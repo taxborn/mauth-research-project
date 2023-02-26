@@ -7,7 +7,7 @@ if __name__ == '__main__':
     pd.set_option('display.max_columns', None)
     pd.set_option('display.width', None)
     # ID,Timestamp,X,Y,Button,Duration
-    user = 10
+    user = 0
     file = f"data/user_{user}_data.csv"
     test_df = pd.read_csv(file, skiprows=1, names=["ID", "Timestamp", "X", "Y", "Button", "Duration"],
                           usecols=['Timestamp', 'X', 'Y'])
@@ -21,7 +21,7 @@ if __name__ == '__main__':
     plt.xlabel('Screen x-coordinates')
     plt.ylabel('Screen y-coordinates')
     plt.title(f"User {user}'s mouse path")
-    plt.plot(x, y, color='#67F8A0')
+    plt.plot(x, y, color='#30B262')
     plt.show()
 
     print("Done with test")

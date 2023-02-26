@@ -3,7 +3,7 @@ from pynput import mouse
 import time
 
 # Duration for data collection
-duration = 45  # 60 * 30  # 60 seconds * 30 minutes
+duration = 60 * 30  # 60 seconds * 30 minutes
 user_id = 0  # update for each user
 global last_press_time
 
@@ -109,7 +109,7 @@ if __name__ == '__main__':
     # Add headers to CSV
     # id, Timestamp, X, Y, button, duration,
     #    id - The subject's id
-    #    timestamp - the Unix timestmap of the event
+    #    timestamp - the Unix timestamp of the event
     #    X - The x-position of the event
     #    Y - The y-position of the event
     #    button - The type of button pressed (left, right, middle, etc..)
@@ -118,7 +118,7 @@ if __name__ == '__main__':
         file.write("ID,Timestamp,X,Y,Button,Duration")
 
     # Create a delay to give time to switch to the game
-    delay = 3
+    delay = 30
     print(f"{delay} seconds until mouse events are recorded...")
     time.sleep(delay)
     print("Starting data collection now.")
