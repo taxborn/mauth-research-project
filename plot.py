@@ -1,27 +1,31 @@
-import random
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 
-if __name__ == '__main__':
-    pd.set_option('display.max_columns', None)
-    pd.set_option('display.width', None)
+
+def main():
+    # to view a certain subjects data, update this value to the desired subject ID
+    subject = 0
+    file = f"data/user_{subject}_data.csv"
     # ID,Timestamp,X,Y,Button,Duration
-    user = 0
-    file = f"data/user_{user}_data.csv"
-    test_df = pd.read_csv(file, skiprows=1, names=["ID", "Timestamp", "X", "Y", "Button", "Duration"],
-                          usecols=['Timestamp', 'X', 'Y'])
+    dataframe = pd.read_csv(file, skiprows=1, names=["ID", "Timestamp", "X", "Y", "Button", "Duration"],
+                            usecols=['Timestamp', 'X', 'Y'])
 
-    test_df.set_index("Timestamp", inplace=True)
-    plt.rcParams.update({'font.size': 12})
-    test_df = test_df.to_numpy()
+    # We want to iterate over each time stamp, and plot the values
+    dataframe.set_index("Timestamp", inplace=True)
 
-    x, y = np.hsplit(test_df, 2)
+    # Split the dataframe into a 2 x n array, and deconstruct those arrays into x's and y's
+    x, y = np.hsplit(dataframe, 2)
 
+    # label the plot and set the title
     plt.xlabel('Screen x-coordinates')
     plt.ylabel('Screen y-coordinates')
-    plt.title(f"User {user}'s mouse path")
-    plt.plot(x, y, color='#30B262')
+    plt.title(f"User {subject}'s mouse path")
+    # plot the data
+    plt.plot(x, y, color='#cba6f7')
+    # load the plot
     plt.show()
 
-    print("Done with test")
+
+if __name__ == '__main__':
+    main()
