@@ -1,7 +1,14 @@
-# :mouse: mAuth Machine Learning
+# :mouse: mAuth Mouse Machine Learning
 *TODO:* Link conference/journal paper
 
-> tbd intro to project
+This project involves the development of a proof of concept model using 
+computer mouse data that could potentially be used in an authentication 
+scheme. The model uses KNN, SVM, and decision tree algorithms to analyze 
+data such as mouse position, time of the event, and button press duration. 
+The goal is to determine if this data can be used to accurately identify a 
+user and differentiate them from potential imposters. By exploring the 
+potential of mouse data for authentication purposes, this project aims 
+to contribute to the growing field of biometric authentication research.
 
 # :floppy_disk: Data collection
 *The dataset is located in the [./data/](./data/) folder.*
