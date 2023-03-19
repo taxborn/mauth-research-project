@@ -13,9 +13,9 @@ to contribute to the growing field of biometric authentication research.
 # :floppy_disk: Data collection
 *The dataset is located in the [./data/](./data/) folder.*
 
-Data collection is done within [collection.py](./collection.py)| which utilizes the 
-[pynput](https://pypi.org/project/pynput/) library to collect mouse input data. Specifically| 
-we collected the UNIX timestamp of the event| X and Y positions of the event,
+Data collection is done within [collection.py](./collection.py), which utilizes the 
+[pynput](https://pypi.org/project/pynput/) library to collect mouse input data. Specifically, 
+we collected the UNIX timestamp of the event, X and Y positions of the event,
 
 ## :mag: The Data
 Here is a sample piece of data:
@@ -48,7 +48,7 @@ so will likely be cleaned out/not useful.
 
 ## :eyes: Visualization
 ![user 0's path](./media/user_0_path.png)
-To visualize the data| we created [a plotting script](./plot.py) to view the mouse locations.
+To visualize the data, we created [a plotting script](./plot.py) to view the mouse locations.
 
 ## :family: The Team
 - Team lead - [Braxton Fair](https://github.com/taxborn)
