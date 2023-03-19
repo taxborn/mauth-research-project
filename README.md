@@ -15,7 +15,8 @@ to contribute to the growing field of biometric authentication research.
 
 Data collection is done within [collection.py](./collection.py), which utilizes the 
 [pynput](https://pypi.org/project/pynput/) library to collect mouse input data. Specifically, 
-we collected the UNIX timestamp of the event, X and Y positions of the event,
+we collected the UNIX timestamp of the event, X and Y positions of the event, which button was pressed, 
+and how long it was pressed for.
 
 ## :mag: The Data
 Here is a sample piece of data:
@@ -51,6 +52,6 @@ so will likely be cleaned out/not useful.
 To visualize the data, we created [a plotting script](./plot.py) to view the mouse locations.
 
 ## :family: The Team
-- Team lead - [Braxton Fair](https://github.com/taxborn)
+- Team Lead - [Braxton Fair](https://github.com/taxborn)
 - Game Analysis and Evaluation Lead - [Mahlet Asmare](https://github.com/mahletzelalem)
 - Model and Technical Paper Lead - [Cole Harp](https://github.com/Cole-Harp) and [Mohammed Ahnaf Khalil](https://github.com/KhalilAhnaf)
