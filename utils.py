@@ -9,8 +9,11 @@ def create_compound_file():
         for i, csv in enumerate(subject_data):
             with open(csv, 'rb') as infile:
                 # If we are not in the first file, skip the header line
-                if i != 0: infile.readline()
-
+                if i != 0:
+                    infile.readline()
+                if i > 1:
+                    outfile.write(b'\n')
+                print(f"copying subject {csv}")
                 # Block copy rest of file from input to output without parsing
                 shutil.copyfileobj(infile, outfile)
 
