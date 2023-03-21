@@ -11,7 +11,7 @@ potential of mouse data for authentication purposes, this project aims
 to contribute to the growing field of biometric authentication research.
 
 # :floppy_disk: Data collection
-*The dataset is located in the [./data/](./data/) folder.*
+*The **raw** dataset is located in the [./data/](./data/) folder. A file with all user data can be found at [./synth_data/user_all_data.csv](./synth_data/user_all_data.csv).*
 
 Data collection is done within [collection.py](./collection.py), which utilizes the 
 [pynput](https://pypi.org/project/pynput/) library to collect mouse input data. Specifically, 
