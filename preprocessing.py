@@ -28,8 +28,9 @@ def data_to_df(file_path):
     df['Path_Tangent'] = np.arctan2((df.Y - df.Y.shift(1)), (df.X - df.X.shift(1)))
     df['Ang_V'] = (df.Path_Tangent - df.Path_Tangent.shift(1)) / (df.Timestamp - df.Timestamp.shift(1))
     # Fill empty data with 0
-    df = df.fillna(0)
+    df.fillna(0)
     print(f"Size: {df.size} \nShape {df.shape} \nColumn Names: {df.columns}")
+    df = sequence_maker(df)
     return df
 
 
