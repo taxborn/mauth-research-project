@@ -1,12 +1,14 @@
 import copy
 import math
+import time
 
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeRegressor
-from sklearn.metrics import confusion_matrix
+from sklearn.svm import SVC, LinearSVC
+from sklearn.metrics import confusion_matrix, accuracy_score
 
 TEST_SPLIT = 0.20  # 0.15 = [96.288%], 0.20 = [96.281%], 0.33 = [96.223%], 0.5 = [96.2%]
 RANDOM_STATE = 0
@@ -86,11 +88,33 @@ def knn(X_train, X_test, y_train) -> int:
 
 
 def svm():
-    """
-    Support Vector Machine / C-Support Vector Classification Model
-    :return:
-    """
-    pass
+     # select the columns to use as features
+    features = ['mean_speed', 'std_speed', 'min_speed', 'max_speed', 'mean_acc', 'std_acc']
+
+    split_start = time.time()
+
+    # split the data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(df[features], df['ID'], test_size=0.2, random_state=42)
+
+    print(f"Split Complete")
+
+    # create an SVM model
+    model = SVC(kernel='linear')
+
+    start_time = time.time()
+
+    # train the model on the training data
+    model.fit(X_train, y_train)
+
+    # predict the labels of the test data
+    y_pred = model.predict(X_test)
+
+    # evaluate the accuracy of the model
+    accuracy = accuracy_score(y_test, y_pred)
+
+    # print accuracy and time taken
+    print(f"Accuracy: {accuracy}")
+    print(f"Time taken: {time.time() - start_time:.2f} seconds")
 
 
 def dt(X_train, X_test, y_train):

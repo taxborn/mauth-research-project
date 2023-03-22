@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from collections import deque
+import os.path
 
 
 def data_to_df(file_path):
@@ -38,7 +39,12 @@ def sequence_maker(df, sequence_length=8):
     sequential_data = []
     prev_data = deque(maxlen=sequence_length)
     count = 0
+    # Save ID
     ID = int(df.iloc[1]['ID'])
+    # calculate the average of the 'values' column while omitting zeros
+    button_non_zero_values = df.loc[df['Duration'] != 0, 'Duration']
+    press_avg = button_non_zero_values.mean()
+
     for i in df.values:
         prev_data.append(
             [n for n in i[:-1]])  # Append each row in df to prev_data without 'Subject ID' column, up to 60 rows
@@ -46,6 +52,11 @@ def sequence_maker(df, sequence_length=8):
             temp = np.copy(prev_data)
             for j in range(7, 14):
                 temp[0, j] = 0
+
+            button_press_time = temp[1: 4].max()
+            if button_press_time == 0:
+                button_press_time = press_avg
+
             mean_x_speed = temp[1:, 5].mean()
             std_x_speed = temp[1:, 5].std()
             min_x_speed = temp[1:, 5].min()
@@ -141,25 +152,42 @@ def sequence_maker(df, sequence_length=8):
             sum_of_angles = np.sum(temp[1:, 12])
             sharp_angles = np.sum(abs(temp[1:, 12]) < .0005)
 
-            for jj in [[mean_x_speed, mean_y_speed, mean_speed, mean_acc, mean_jerk, mean_ang, mean_curve,
-                        std_x_speed, std_y_speed, std_speed, std_acc, std_ang, std_jerk, std_curve,
-                        min_x_speed, min_y_speed, min_speed, min_acc, min_ang, min_jerk, min_curve,
-                        max_x_speed, max_y_speed, max_speed, max_acc, max_ang, max_jerk, max_curve,
-                        elapsed_time, sum_of_angles, accTimeatBeg, traj_length, numCritPoints]]:
+            for jj in [[mean_x_speed, mean_y_speed, mean_speed, mean_x_acc, mean_y_acc, mean_acc, mean_jerk, mean_ang,
+                        mean_curve, mean_tan,
+                        std_x_speed, std_y_speed, std_speed, std_x_acc, std_y_acc, std_acc, std_ang, std_jerk,
+                        std_curve, std_tan, min_tan,
+                        min_x_speed, min_y_speed, min_speed, min_x_acc, min_y_acc, min_acc, min_ang, min_jerk,
+                        min_curve,
+                        max_x_speed, max_y_speed, max_speed, max_x_acc, max_y_acc, max_acc, max_ang, max_jerk,
+                        max_curve, max_tan,
+                        elapsed_time, sum_of_angles, accTimeatBeg, traj_length, numCritPoints, button_press_time]]:
                 sequential_data.append(
                     jj)  # Prev_data now contains SEQ_LEN amount of samples and can be appended as one batch of 60 for RNN
         count += 1
         if count % 1000 == 0:
             print(count)
     df = pd.DataFrame(sequential_data,
-                      columns=['mean_x_speed', 'mean_y_speed', 'mean_speed', 'mean_acc', 'mean_jerk', 'mean_ang',
-                               'mean_curve', 'std_x_speed', 'std_y_speed', 'std_speed', 'std_acc', 'std_ang',
-                               'std_jerk',
-                               'std_curve', 'min_x_speed', 'min_y_speed', 'min_speed', 'min_acc', 'min_ang', 'min_jerk',
-                               'min_curve', 'max_x_speed', 'max_y_speed', 'max_speed', 'max_acc', 'max_ang', 'max_jerk',
-                               'max_curve', 'elapsed_time', 'sum_of_angles', 'accTimeatBeg', 'traj_length',
-                               'numCritPoints'])
+                      columns=['mean_x_speed', 'mean_y_speed', 'mean_speed', 'mean_x_acc', 'mean_y_acc', 'mean_acc',
+                               'mean_jerk', 'mean_ang',
+                               'mean_curve', 'mean_tan',
+                               'std_x_speed', 'std_y_speed', 'std_speed', 'std_x_acc', 'std_y_acc', 'std_acc',
+                               'std_ang', 'std_jerk',
+                               'std_curve', 'std_tan', 'min_tan',
+                               'min_x_speed', 'min_y_speed', 'min_speed', 'min_x_acc', 'min_y_acc', 'min_acc',
+                               'min_ang', 'min_jerk',
+                               'min_curve',
+                               'max_x_speed', 'max_y_speed', 'max_speed', 'max_x_acc', 'max_y_acc', 'max_acc',
+                               'max_ang', 'max_jerk',
+                               'max_curve', 'max_tan',
+                               'elapsed_time', 'sum_of_angles', 'accTimeatBeg', 'traj_length', 'numCritPoints',
+                               'button_press_time'])
     df.insert(0, 'ID', ID)
     print(f"Head: {df.head()} \nSize: {df.size} \nShape {df.shape} \nColumn Names: {df.columns}")
-    # df.to_csv(f"{ID}_Extracted{sequence_length}.csv")
+    df.to_csv(f"extracted_features_data/user_{ID}_extracted_{sequence_length}.csv", index=False)
     return df
+
+
+if __name__ == "__main__":
+    for i in range(15):
+        subj_df = data_to_df(f"data/user_{i}_data.csv")
+        print('done')
