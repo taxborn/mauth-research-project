@@ -1,4 +1,3 @@
-import time
 import copy
 import math
 
@@ -77,8 +76,6 @@ def knn(X_train, X_test, y_train) -> int:
     # Compute K. K = floor(sqrt(n)), and round K down to the nearest odd integer.
     # This equation was taken from this YouTube video: https://www.youtube.com/watch?v=4HKqjENq9OU
     n = len(y_train)
-    k = int(math.sqrt(n))
-    k += k % 2 - 1
     k = 3
     print(f"> number of events = {n}, {k = }")
 
@@ -108,33 +105,21 @@ def dt(X_train, X_test, y_train):
 
 def main():
     # Save timings for averages
-    split_times = []
-    model_times = []
     accuracies = []
-
-    tot_start = time.time()
 
     # Loop over the subjects
     for subject in range(SUBJECTS):
         print(f"{f'k-Nearest Neighbors ({subject + 1} / {SUBJECTS})':-^{MESSAGE_WIDTH}}")
-
-        start = time.time()
         # Split the dataset with the current subject
         X_train, X_test, y_train, y_test = process("synth_data/user_all_data.csv", subject)
-        end = time.time()
-        took = end - start
-        print(f"> split finished (took {round(took, 3)}s). starting knn...")
-        split_times.append(took)
+        print(f"> starting knn...")
 
-        start = time.time()
         # Run KNN which returns the accuracy of the model.
         y_pred = knn(X_train, X_test, y_train)
-        end = time.time()
-        tot = end - start
-        print(f"> knn took {round(tot, NUM_ROUNDING)}s.")
-        model_times.append(tot)
 
+        ##############################################
         # Statistics about the model
+        ##############################################
         cm = confusion_matrix(y_test, y_pred)
         print(cm)
         tn, fp, fn, tp = cm.ravel()
@@ -150,19 +135,11 @@ def main():
         fnr = round(100 * fp / (fp + tn), NUM_ROUNDING)
         print(f"> accuracy = {acc}% {fpr = }% {fnr = }%")
 
-    tot_end = time.time()
-
-    # Calculate statistics
-    tot = round(tot_end - tot_start, NUM_ROUNDING)
-    sp_avg = round(sum(split_times) / SUBJECTS, NUM_ROUNDING)
-    md_avg = round(sum(model_times) / SUBJECTS, NUM_ROUNDING)
     acc_avg = round(sum(accuracies) / SUBJECTS, NUM_ROUNDING)
 
     # Print the statistics, this is the new f-string (or format string) syntax that was introduced in Python 3.6
     print(f"{' kNN Finished! ':-^{MESSAGE_WIDTH}}")
-    print(f"{f'average split time: {sp_avg}s, average model time: {md_avg}s':^{MESSAGE_WIDTH}}")
     print(f"{f'average accuracy: {acc_avg}%':^{MESSAGE_WIDTH}}")
-    print(f"{f'total train and validation time: {tot}s':^{MESSAGE_WIDTH}}")
 
 
 if __name__ == "__main__":
