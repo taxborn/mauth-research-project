@@ -3,6 +3,36 @@ import pandas as pd
 from collections import deque
 
 
+def data_to_df(file_path):
+    df = pd.read_csv(file_path)
+    # Insert columns and run calculations
+    df.insert(len(df.columns) - 1, "X_Speed", 0)
+    df.insert(len(df.columns) - 1, "Y_Speed", 0)
+    df.insert(len(df.columns) - 1, "Speed", 0)
+    df.insert(len(df.columns) - 1, "X_Acceleration", 0)
+    df.insert(len(df.columns) - 1, "Y_Acceleration", 0)
+    df.insert(len(df.columns) - 1, "Acceleration", 0)
+    df.insert(len(df.columns) - 1, "Jerk", 0)
+    df.insert(len(df.columns) - 1, "Ang_V", 0)
+    df.insert(len(df.columns) - 1, "Path_Tangent", 0)
+    df.insert(len(df.columns) - 1, "Direction", 0)
+
+    df = df.loc[(df["X"].shift() != df["X"]) | (df["Y"].shift() != df["Y"])]  # Remove repeat data
+    df['X_Speed'] = (df.X - df.X.shift(1)) / (df.Timestamp - df.Timestamp.shift(1))
+    df['Y_Speed'] = (df.Y - df.Y.shift(1)) / (df.Timestamp - df.Timestamp.shift(1))
+    df['Speed'] = np.sqrt((df.X_Speed ** 2) + (df.Y_Speed ** 2))
+    df['X_Acceleration'] = (df.X_Speed - df.X_Speed.shift(1)) / (df.Timestamp - df.Timestamp.shift(1))
+    df['Y_Acceleration'] = (df.Y_Speed - df.Y_Speed.shift(1)) / (df.Timestamp - df.Timestamp.shift(1))
+    df['Acceleration'] = (df.Speed - df.Speed.shift(1)) / (df.Timestamp - df.Timestamp.shift(1))
+    df['Jerk'] = (df.Acceleration - df.Acceleration.shift(1)) / (df.Timestamp - df.Timestamp.shift(1))
+    df['Path_Tangent'] = np.arctan2((df.Y - df.Y.shift(1)), (df.X - df.X.shift(1)))
+    df['Ang_V'] = (df.Path_Tangent - df.Path_Tangent.shift(1)) / (df.Timestamp - df.Timestamp.shift(1))
+    # Fill empty data with 0
+    df = df.fillna(0)
+    print(f"Size: {df.size} \nShape {df.shape} \nColumn Names: {df.columns}")
+    return df
+
+
 def sequence_maker(df, sequence_length=8):
     sequential_data = []
     prev_data = deque(maxlen=sequence_length)
@@ -130,5 +160,5 @@ def sequence_maker(df, sequence_length=8):
                                'numCritPoints'])
     df.insert(0, 'ID', ID)
     print(f"Head: {df.head()} \nSize: {df.size} \nShape {df.shape} \nColumn Names: {df.columns}")
-    #df.to_csv(f"{ID}_Extracted{sequence_length}.csv")
+    # df.to_csv(f"{ID}_Extracted{sequence_length}.csv")
     return df
