@@ -4,7 +4,6 @@ from collections import deque
 
 
 def sequence_maker(df, sequence_length=8):
-    print(df.head())
     sequential_data = []
     prev_data = deque(maxlen=sequence_length)
     count = 0
@@ -131,5 +130,5 @@ def sequence_maker(df, sequence_length=8):
                                'numCritPoints'])
     df.insert(0, 'ID', ID)
     print(f"Head: {df.head()} \nSize: {df.size} \nShape {df.shape} \nColumn Names: {df.columns}")
-    df.to_csv(f"{ID}_Extracted{sequence_length}.csv")
+    #df.to_csv(f"{ID}_Extracted{sequence_length}.csv")
     return df
