@@ -1,10 +1,11 @@
 import os.path
 from pynput import mouse
 import time
+import constants
 
 # Duration for data collection
-duration = 60 * 30  # 60 seconds * 30 minutes
-user_id = 0  # update for each user
+duration = constants.DURATION  # 60 seconds * 30 minutes
+user_id = constants.SUBJECT_ID
 global last_press_time
 
 
@@ -119,7 +120,7 @@ if __name__ == '__main__':
         file.write("ID,Timestamp,X,Y,Button,Duration")
 
     # Create a delay to give time to switch to the game
-    delay = 30
+    delay = constants.START_WAIT
     print(f"{delay} seconds until mouse events are recorded...")
     time.sleep(delay)
     print("Starting data collection now.")

@@ -1,6 +1,5 @@
 import copy
-import math
-import time
+import constants
 
 import pandas as pd
 import numpy as np
@@ -9,12 +8,6 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.svm import SVC, LinearSVC
 from sklearn.metrics import confusion_matrix, accuracy_score
-
-TEST_SPLIT = 0.20  # 0.15 = [96.288%], 0.20 = [96.281%], 0.33 = [96.223%], 0.5 = [96.2%]
-RANDOM_STATE = 0
-SUBJECTS = 15  # How many subjects of our 15 subject dataset to select from
-MESSAGE_WIDTH = 64
-NUM_ROUNDING = 3
 
 
 def dump_dataset(dataset, outfile):
@@ -33,7 +26,7 @@ def get_other_data(dataset, subject, samples):
     :return:
     """
     other = dataset['ID'] != subject
-    return dataset[other].sample(samples, random_state=RANDOM_STATE)
+    return dataset[other].sample(samples, random_state=constants.RANDOM_STATE)
 
 
 def process(input: str, subject: int):
@@ -65,7 +58,7 @@ def process(input: str, subject: int):
     y = mixed_set[:, 0]  # The subject ID is the first column
 
     # Returhn the split with constants defined at the top of the file
-    return train_test_split(X, y, test_size=TEST_SPLIT, random_state=RANDOM_STATE)
+    return train_test_split(X, y, test_size=constants.TEST_SPLIT, random_state=constants.RANDOM_STATE)
 
 
 def knn(X_train, X_test, y_train) -> int:
@@ -88,6 +81,7 @@ def knn(X_train, X_test, y_train) -> int:
 
 
 def svm():
+    """
      # select the columns to use as features
     features = ['mean_speed', 'std_speed', 'min_speed', 'max_speed', 'mean_acc', 'std_acc']
 
@@ -115,6 +109,7 @@ def svm():
     # print accuracy and time taken
     print(f"Accuracy: {accuracy}")
     print(f"Time taken: {time.time() - start_time:.2f} seconds")
+    """
 
 
 def dt(X_train, X_test, y_train):
@@ -122,7 +117,7 @@ def dt(X_train, X_test, y_train):
     Decision Tree Model
     :return:
     """
-    model = DecisionTreeRegressor(random_state=RANDOM_STATE)
+    model = DecisionTreeRegressor(random_state=constants.RANDOM_STATE)
     model.fit(X_train, y_train)
     return model.predict(X_test)
 
@@ -132,8 +127,8 @@ def main():
     accuracies = []
 
     # Loop over the subjects
-    for subject in range(SUBJECTS):
-        print(f"{f'k-Nearest Neighbors ({subject + 1} / {SUBJECTS})':-^{MESSAGE_WIDTH}}")
+    for subject in range(constants.SUBJECTS):
+        print(f"{f'k-Nearest Neighbors ({subject + 1} / {constants.SUBJECTS})':-^{constants.MESSAGE_WIDTH}}")
         # Split the dataset with the current subject
         X_train, X_test, y_train, y_test = process("synth_data/user_all_data.csv", subject)
         print(f"> starting knn...")
@@ -152,18 +147,18 @@ def main():
         err = (far + frr) / 2
         print(f"> {far = } {frr = } {err = }")
         # calculate accuracy
-        acc = round(100 * (tp + tn) / (tp + tn + fp + fn), NUM_ROUNDING)
+        acc = round(100 * (tp + tn) / (tp + tn + fp + fn), constants.NUM_ROUNDING)
         accuracies.append(acc)
         # calculate false positive rate, false negative rate
-        fpr = round(100 * fn / (fn + tp), NUM_ROUNDING)
-        fnr = round(100 * fp / (fp + tn), NUM_ROUNDING)
+        fpr = round(100 * fn / (fn + tp), constants.NUM_ROUNDING)
+        fnr = round(100 * fp / (fp + tn), constants.NUM_ROUNDING)
         print(f"> accuracy = {acc}% {fpr = }% {fnr = }%")
 
-    acc_avg = round(sum(accuracies) / SUBJECTS, NUM_ROUNDING)
+    acc_avg = round(sum(accuracies) / constants.SUBJECTS, constants.NUM_ROUNDING)
 
     # Print the statistics, this is the new f-string (or format string) syntax that was introduced in Python 3.6
-    print(f"{' kNN Finished! ':-^{MESSAGE_WIDTH}}")
-    print(f"{f'average accuracy: {acc_avg}%':^{MESSAGE_WIDTH}}")
+    print(f"{' kNN Finished! ':-^{constants.MESSAGE_WIDTH}}")
+    print(f"{f'average accuracy: {acc_avg}%':^{constants.MESSAGE_WIDTH}}")
 
 
 if __name__ == "__main__":
