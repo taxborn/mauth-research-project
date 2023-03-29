@@ -1,4 +1,5 @@
 import copy
+import math
 import time
 
 import constants
@@ -30,7 +31,7 @@ def feature_set(df, feature_set_count=-1):
          'std_curve', 'std_tan', 'min_tan']
     ]
 
-    if feature_set_counter > 0:
+    if feature_set_counter < 0:
         new_df = df[constants.FEATURE_LIST].copy()
         new_df.dropna(inplace=True)
         return new_df
@@ -121,13 +122,14 @@ def process_svc(input: str, subject: str):
     y = joined_sets['ID']
 
     # Select the most seemingly relevant features using SelectKBes
-    selector = SelectKBest(k=7)
+    selector = SelectKBest(k=10)
     selector.fit(X, y)
     mask = selector.get_support()
 
     # Print the names of the selected features
     for col, selected in zip(X.columns, mask):
         if selected:
+
             print(col)
 
     X_selected = X.loc[:, mask]
@@ -168,13 +170,18 @@ def svc_grid_search(X_train, X_test, y_train, y_test):
 
     # Train an SVC classifier using parallel processing
     start_time = time.time()
-    clf = SVC(C=1, kernel='linear', max_iter=1000000, random_state=constants.RANDOM_STATE)
+    # clf = SVC(C=1, kernel='linear', max_iter=1000000, random_state=constants.RANDOM_STATE)
+    clf = KNeighborsClassifier(n_neighbors=3, p=2, metric='euclidean')
     # clf.fit(X_train_pca, y_train)
 
     # Tune the hyperparameters
     # n_jobs = CORES PARALLELIZED
-    param_grid = {'C': [0.1, 1, 10], 'gamma': ['scale', 'auto']}
-    grid_search = GridSearchCV(clf, param_grid, cv=5, n_jobs=-1)
+    k1 = int(math.sqrt(len(y_train)))
+    k = k1 + k1 % 2 - 1
+    k2 = int(math.sqrt(k))
+    k_1 = k2 + k2 % 2 - 1
+    param_grid = {'n_neighbors': [k, k_1, 3]}
+    grid_search = GridSearchCV(clf, param_grid, cv=5, n_jobs=8)
     grid_search.fit(X_train, y_train)
     best_params = grid_search.best_params_
 
@@ -185,43 +192,15 @@ def svc_grid_search(X_train, X_test, y_train, y_test):
 
 
 def svc(X_train, X_test, y_train, y_test):
-    # Reduce dimensionality with PCA
-
     start_time = time.time()
-    clf = SVC(C=1, kernel='linear', random_state=constants.RANDOM_STATE)
+    # clf = SVC(C=1, kernel='linear', random_state=constants.RANDOM_STATE)
+    clf = KNeighborsClassifier(n_neighbors=3, p=2, metric='euclidean')
     clf.fit(X_train, y_train)
     print(f"Fit took: {(time.time() - start_time) / 60} minutes")
 
     start_time = time.time()
     y_pred = clf.predict(X_test)
     print(f"Predict took took: {(time.time() - start_time) / 60} minutes")
-
-def baggingClassifier(X_train, X_test, y_train, y_test):
-    pca = PCA(n_components=0.95)
-    X_train = pca.fit_transform(X_train)
-    X_test = pca.transform(X_test)
-    estimator = []
-    estimator.append(('SVC', SVC(gamma='scale', max_iter=50000, probability=True)))
-    estimator.append(('DTC', DecisionTreeClassifier()))
-    vot_hard = VotingClassifier(estimators=estimator, voting='hard', n_jobs=-1)
-    vot_hard.fit(X_train, y_train)
-    y_pred = vot_hard.predict(X_test)
-
-    # using accuracy_score metric to predict accuracy
-    score = accuracy_score(y_test, y_pred)
-    print("Hard Voting Score % d" % score)
-
-    # Voting Classifier with soft voting
-    vot_soft = VotingClassifier(estimators=estimator, voting='soft', n_jobs=-1)
-    vot_soft.fit(X_train, y_train)
-    y_pred = vot_soft.predict(X_test)
-
-    # using accuracy_score
-    score = accuracy_score(y_test, y_pred)
-    print("Soft Voting Score % d" % score)
-
-
-    return classification_report(y_test, y_pred)
 
 
 def dt(X_train, X_test, y_train):
@@ -281,7 +260,6 @@ def knn_run():
 
 
 def svc_run():
-    accuracies = []
     df_13 = "synth_data/extracted_features_len_64/user_13_extracted_64.csv"
     # Get paths to loop over
     for i in range(10):
@@ -293,7 +271,7 @@ def svc_run():
         print(f"> Starting svc...")
 
         # Run SVC which returns the accuracy of the model.
-        out = baggingClassifier(X_train, X_test, y_train, y_test)
+        out = svc_grid_search(X_train, X_test, y_train, y_test)
 
         ##############################################
         # Statistics about the model
@@ -325,5 +303,5 @@ def dt_run():
 
 if __name__ == "__main__":
     svc_run()
-    dt_run()
-    knn_run()
+    # dt_run()
+    # knn_run()
