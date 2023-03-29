@@ -35,7 +35,7 @@ def data_to_df(file_path):
     return df
 
 
-def sequence_maker(df, sequence_length=8):
+def sequence_maker(df, sequence_length=64):
     sequential_data = []
     prev_data = deque(maxlen=sequence_length)
     count = 0
@@ -182,12 +182,13 @@ def sequence_maker(df, sequence_length=8):
                                'elapsed_time', 'sum_of_angles', 'accTimeatBeg', 'traj_length', 'numCritPoints',
                                'button_press_time'])
     df.insert(0, 'ID', ID)
+    df.fillna(0)
     print(f"Head: {df.head()} \nSize: {df.size} \nShape {df.shape} \nColumn Names: {df.columns}")
-    df.to_csv(f"extracted_features_data/user_{ID}_extracted_{sequence_length}.csv", index=False)
+    df.to_csv(f"synth_data/extracted_features_len_64/user_{ID}_extracted_{sequence_length}.csv", index=False)
     return df
 
 
 if __name__ == "__main__":
     for i in range(15):
-        subj_df = data_to_df(f"data/user_{i}_data.csv")
+        subj_df = data_to_df(f"raw_data/user_{i}_data.csv")
         print('done')

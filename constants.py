@@ -1,4 +1,3 @@
-# Constants used for data collection
 DURATION = 60 * 30  # 60 seconds * 30 minutes
 START_WAIT = 30
 SUBJECT_ID = 0
@@ -12,3 +11,18 @@ SUBJECTS = 15
 MESSAGE_WIDTH = 64
 NUM_ROUNDING = 3
 MODEL = "knn"  # DecisionTree, KNN, or SVC
+
+FEATURE_LIST = ['ID', 'mean_x_speed', 'mean_y_speed', 'mean_speed', 'mean_x_acc', 'mean_y_acc', 'mean_acc',
+                               'mean_jerk', 'mean_ang',
+                               'mean_curve', 'mean_tan',
+                               'std_x_speed', 'std_y_speed', 'std_speed', 'std_x_acc', 'std_y_acc', 'std_acc',
+                               'std_ang', 'std_jerk',
+                               'std_curve', 'std_tan', 'min_tan',
+                               'min_x_speed', 'min_y_speed', 'min_speed', 'min_x_acc', 'min_y_acc', 'min_acc',
+                               'min_ang', 'min_jerk',
+                               'min_curve',
+                               'max_x_speed', 'max_y_speed', 'max_speed', 'max_x_acc', 'max_y_acc', 'max_acc',
+                               'max_ang', 'max_jerk',
+                               'max_curve', 'max_tan',
+                               'elapsed_time', 'sum_of_angles', 'accTimeatBeg', 'traj_length', 'numCritPoints',
+                               'button_press_time']
