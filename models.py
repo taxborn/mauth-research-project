@@ -169,32 +169,30 @@ def svc_grid_search(X_train, X_test, y_train, y_test):
     X_test = pca.transform(X_test)
 
     # Train an SVC classifier using parallel processing
-    start_time = time.time()
-    # clf = SVC(C=1, kernel='linear', max_iter=1000000, random_state=constants.RANDOM_STATE)
-    clf = KNeighborsClassifier(n_neighbors=3, p=2, metric='euclidean')
+    clf = SVC(C=1, kernel='rbf', random_state=constants.RANDOM_STATE, gamma='scale')
+    # clf = KNeighborsClassifier(n_neighbors=3, p=2, metric='euclidean')
     # clf.fit(X_train_pca, y_train)
 
     # Tune the hyperparameters
     # n_jobs = CORES PARALLELIZED
-    k1 = int(math.sqrt(len(y_train)))
-    k = k1 + k1 % 2 - 1
-    k2 = int(math.sqrt(k))
-    k_1 = k2 + k2 % 2 - 1
-    param_grid = {'n_neighbors': [k, k_1, 3]}
-    grid_search = GridSearchCV(clf, param_grid, cv=5, n_jobs=8)
+    param_grid = {'C': [0.1, 1], 'cache_size': [200, 400, 800]}
+    grid_search = GridSearchCV(clf, param_grid, cv=5, n_jobs=constants.N_JOBS)
     grid_search.fit(X_train, y_train)
     best_params = grid_search.best_params_
 
     # Evaluate the model
     best_clf = grid_search.best_estimator_
+    start_time = time.time()
+    print(f"Prediction started at {start_time}")
     y_pred = best_clf.predict(X_test)
+    print(f"Predict took took: {time.time() - start_time} minutes")
     return [classification_report(y_test, y_pred), best_clf, best_params]
 
 
 def svc(X_train, X_test, y_train, y_test):
     start_time = time.time()
-    # clf = SVC(C=1, kernel='linear', random_state=constants.RANDOM_STATE)
-    clf = KNeighborsClassifier(n_neighbors=3, p=2, metric='euclidean')
+    clf = SVC(C=1, kernel='linear', random_state=constants.RANDOM_STATE)
+    # clf = KNeighborsClassifier(n_neighbors=3, p=2, metric='euclidean')
     clf.fit(X_train, y_train)
     print(f"Fit took: {(time.time() - start_time) / 60} minutes")
 
@@ -260,18 +258,20 @@ def knn_run():
 
 
 def svc_run():
-    df_13 = "synth_data/extracted_features_len_64/user_13_extracted_64.csv"
+    df_13 = "synth_data/extracted_features_len_64_d2/user_13_extracted_64_d2.csv"
     # Get paths to loop over
     for i in range(10):
-        file_name = f"user_{i}_extracted_64.csv"
-        file_path = os.path.join("synth_data/extracted_features_len_64/", file_name)
+        file_name = f"user_{i}_extracted_64_d2.csv"
+        file_path = os.path.join("synth_data/extracted_features_len_64_d2/", file_name)
         print(file_path)
 
         X_train, X_test, y_train, y_test = process_svc(file_path, df_13)
-        print(f"> Starting svc...")
+        print(f"> Starting grid search...")
 
         # Run SVC which returns the accuracy of the model.
+        start_time = time.time()
         out = svc_grid_search(X_train, X_test, y_train, y_test)
+        print(f"grid search took: {(time.time() - start_time)} minutes")
 
         ##############################################
         # Statistics about the model

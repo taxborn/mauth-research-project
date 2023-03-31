@@ -72,6 +72,18 @@ def sequence_maker(df, sequence_length=64):
             min_speed = temp[1:, 7].min()
             max_speed = temp[1:, 7].max()
 
+            # Calculate mean speeds over distance
+            dx = np.diff(temp[1:, 2])
+            dy = np.diff(temp[1:, 3])
+            dist = np.sqrt(dx ** 2 + dy ** 2)
+            time = np.diff(temp[1:, 1])
+            speed_over_dist = np.divide(dist, time)
+
+            mean_speed_over_dist = np.mean(speed_over_dist)
+            std_speed_over_dist = np.std(speed_over_dist)
+            min_speed_over_dist = np.min(speed_over_dist)
+            max_speed_over_dist = np.max(speed_over_dist)
+
             mean_x_acc = temp[1:, 8].mean()
             std_x_acc = temp[1:, 8].std()
             min_x_acc = temp[1:, 8].min()
@@ -86,6 +98,13 @@ def sequence_maker(df, sequence_length=64):
             std_acc = temp[1:, 10].std()
             min_acc = temp[1:, 10].min()
             max_acc = temp[1:, 10].max()
+
+            acceleration = np.divide(np.diff(speed_over_dist), time[:-1])
+
+            mean_acceleration_over_dist = np.mean(acceleration)
+            std_acceleration_over_dist = np.std(acceleration)
+            min_acceleration_over_dist = np.min(acceleration)
+            max_acceleration_over_dist = np.max(acceleration)
 
             mean_jerk = temp[1:, 11].mean()
             std_jerk = temp[1:, 11].std()
@@ -150,7 +169,7 @@ def sequence_maker(df, sequence_length=64):
             max_curve = np.max(curve_list)
 
             sum_of_angles = np.sum(temp[1:, 12])
-            sharp_angles = np.sum(abs(temp[1:, 12]) < .0005)
+            #sharp_angles = np.sum(abs(temp[1:, 12]) < .0005)
 
             for jj in [[mean_x_speed, mean_y_speed, mean_speed, mean_x_acc, mean_y_acc, mean_acc, mean_jerk, mean_ang,
                         mean_curve, mean_tan,
@@ -160,7 +179,8 @@ def sequence_maker(df, sequence_length=64):
                         min_curve,
                         max_x_speed, max_y_speed, max_speed, max_x_acc, max_y_acc, max_acc, max_ang, max_jerk,
                         max_curve, max_tan,
-                        elapsed_time, sum_of_angles, accTimeatBeg, traj_length, numCritPoints, button_press_time]]:
+                        elapsed_time, sum_of_angles, accTimeatBeg, traj_length, numCritPoints, button_press_time,
+                        mean_speed_over_dist, std_speed_over_dist, min_speed_over_dist, max_speed_over_dist, mean_acceleration_over_dist, std_acceleration_over_dist, max_acceleration_over_dist, min_acceleration_over_dist]]:
                 sequential_data.append(
                     jj)  # Prev_data now contains SEQ_LEN amount of samples and can be appended as one batch of 60 for RNN
         count += 1
@@ -180,11 +200,13 @@ def sequence_maker(df, sequence_length=64):
                                'max_ang', 'max_jerk',
                                'max_curve', 'max_tan',
                                'elapsed_time', 'sum_of_angles', 'accTimeatBeg', 'traj_length', 'numCritPoints',
-                               'button_press_time'])
+                               'button_press_time', 'mean_speed_over_dist', 'std_speed_over_dist',
+                               'min_speed_over_dist', 'max_speed_over_dist', 'mean_acceleration_over_dist',
+                               'std_acceleration_over_dist', 'max_acceleration_over_dist', 'min_acceleration_over_dist'])
     df.insert(0, 'ID', ID)
     df.fillna(0)
     print(f"Head: {df.head()} \nSize: {df.size} \nShape {df.shape} \nColumn Names: {df.columns}")
-    df.to_csv(f"synth_data/extracted_features_len_64/user_{ID}_extracted_{sequence_length}.csv", index=False)
+    df.to_csv(f"synth_data/extracted_features_len_64_d2/user_{ID}_extracted_{sequence_length}_d2.csv", index=False)
     return df
 
 

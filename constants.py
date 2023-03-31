@@ -12,6 +12,8 @@ MESSAGE_WIDTH = 64
 NUM_ROUNDING = 3
 MODEL = "knn"  # DecisionTree, KNN, or SVC
 
+N_JOBS = -1  # -1 for all cores, otherwise specify number of cores
+
 FEATURE_LIST = ['ID', 'mean_x_speed', 'mean_y_speed', 'mean_speed', 'mean_x_acc', 'mean_y_acc', 'mean_acc',
                                'mean_jerk', 'mean_ang',
                                'mean_curve', 'mean_tan',
