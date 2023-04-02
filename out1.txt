@@ -1,0 +1,412 @@
+synth_data/extracted_features_len_64_d2/user_0_extracted_64_d2.csv
+> splitting data for subjects:
+synth_data/extracted_features_len_64_d2/user_13_extracted_64_d2.csv
+synth_data/extracted_features_len_64_d2/user_0_extracted_64_d2.csv
+2765809
+4064720
+   ID  mean_x_speed  ...  numCritPoints  button_press_time
+2  13   -521.055120  ...             15       1.677263e+09
+3  13   -530.987901  ...             14       1.677263e+09
+4  13   -521.056246  ...             13       1.677263e+09
+5  13   -513.109926  ...             12       1.677263e+09
+6  13   -493.267064  ...             12       1.677263e+09
+
+[5 rows x 47 columns]
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:112: UserWarning: Features [40 42] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:113: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+mean_speed
+std_y_speed
+std_speed
+std_y_acc
+std_ang
+min_y_speed
+min_acc
+max_y_speed
+max_speed
+max_y_acc
+> Starting svc...
+Classification report:
+              precision    recall  f1-score   support
+
+           0       0.69      0.80      0.74     22290
+          13       0.68      0.54      0.60     17535
+
+    accuracy                           0.69     39825
+   macro avg       0.69      0.67      0.67     39825
+weighted avg       0.69      0.69      0.68     39825
+
+Best clf: SVC(C=10, max_iter=1000000, random_state=0)
+Best params: {'C': 10, 'gamma': 'scale'}
+synth_data/extracted_features_len_64_d2/user_1_extracted_64_d2.csv
+> splitting data for subjects:
+synth_data/extracted_features_len_64_d2/user_13_extracted_64_d2.csv
+synth_data/extracted_features_len_64_d2/user_1_extracted_64_d2.csv
+2765809
+4295830
+   ID  mean_x_speed  ...  numCritPoints  button_press_time
+2  13   -521.055120  ...             15       1.677263e+09
+3  13   -530.987901  ...             14       1.677263e+09
+4  13   -521.056246  ...             13       1.677263e+09
+5  13   -513.109926  ...             12       1.677263e+09
+6  13   -493.267064  ...             12       1.677263e+09
+
+[5 rows x 47 columns]
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:112: UserWarning: Features [40 42] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:113: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+std_y_acc
+std_acc
+std_jerk
+min_y_acc
+min_acc
+min_jerk
+max_y_acc
+max_acc
+max_jerk
+button_press_time
+> Starting svc...
+Classification report:
+              precision    recall  f1-score   support
+
+           1       1.00      1.00      1.00     23594
+          13       1.00      1.00      1.00     17492
+
+    accuracy                           1.00     41086
+   macro avg       1.00      1.00      1.00     41086
+weighted avg       1.00      1.00      1.00     41086
+
+Best clf: SVC(C=0.1, max_iter=1000000, random_state=0)
+Best params: {'C': 0.1, 'gamma': 'scale'}
+synth_data/extracted_features_len_64_d2/user_2_extracted_64_d2.csv
+> splitting data for subjects:
+synth_data/extracted_features_len_64_d2/user_13_extracted_64_d2.csv
+synth_data/extracted_features_len_64_d2/user_2_extracted_64_d2.csv
+2765809
+3390860
+   ID  mean_x_speed  ...  numCritPoints  button_press_time
+2  13   -521.055120  ...             15       1.677263e+09
+3  13   -530.987901  ...             14       1.677263e+09
+4  13   -521.056246  ...             13       1.677263e+09
+5  13   -513.109926  ...             12       1.677263e+09
+6  13   -493.267064  ...             12       1.677263e+09
+
+[5 rows x 47 columns]
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:112: UserWarning: Features [40 42] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:113: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+std_y_speed
+std_x_acc
+std_ang
+std_curve
+min_tan
+min_y_speed
+min_ang
+max_y_speed
+max_ang
+numCritPoints
+> Starting svc...
+Classification report:
+              precision    recall  f1-score   support
+
+           2       0.89      0.70      0.78     18574
+          13       0.74      0.90      0.82     17576
+
+    accuracy                           0.80     36150
+   macro avg       0.81      0.80      0.80     36150
+weighted avg       0.82      0.80      0.80     36150
+
+Best clf: SVC(C=10, max_iter=1000000, random_state=0)
+Best params: {'C': 10, 'gamma': 'scale'}
+synth_data/extracted_features_len_64_d2/user_3_extracted_64_d2.csv
+> splitting data for subjects:
+synth_data/extracted_features_len_64_d2/user_13_extracted_64_d2.csv
+synth_data/extracted_features_len_64_d2/user_3_extracted_64_d2.csv
+2765809
+3774045
+   ID  mean_x_speed  ...  numCritPoints  button_press_time
+2  13   -521.055120  ...             15       1.677263e+09
+3  13   -530.987901  ...             14       1.677263e+09
+4  13   -521.056246  ...             13       1.677263e+09
+5  13   -513.109926  ...             12       1.677263e+09
+6  13   -493.267064  ...             12       1.677263e+09
+
+[5 rows x 47 columns]
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:112: UserWarning: Features [40 42] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:113: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+std_x_acc
+std_y_acc
+std_acc
+std_jerk
+min_x_acc
+min_y_acc
+min_acc
+min_jerk
+max_x_acc
+max_jerk
+> Starting svc...
+Classification report:
+              precision    recall  f1-score   support
+
+           3       0.70      0.89      0.79     20686
+          13       0.82      0.55      0.66     17554
+
+    accuracy                           0.74     38240
+   macro avg       0.76      0.72      0.72     38240
+weighted avg       0.75      0.74      0.73     38240
+
+Best clf: SVC(C=10, max_iter=1000000, random_state=0)
+Best params: {'C': 10, 'gamma': 'scale'}
+synth_data/extracted_features_len_64_d2/user_4_extracted_64_d2.csv
+> splitting data for subjects:
+synth_data/extracted_features_len_64_d2/user_13_extracted_64_d2.csv
+synth_data/extracted_features_len_64_d2/user_4_extracted_64_d2.csv
+2765809
+3582315
+   ID  mean_x_speed  ...  numCritPoints  button_press_time
+2  13   -521.055120  ...             15       1.677263e+09
+3  13   -530.987901  ...             14       1.677263e+09
+4  13   -521.056246  ...             13       1.677263e+09
+5  13   -513.109926  ...             12       1.677263e+09
+6  13   -493.267064  ...             12       1.677263e+09
+
+[5 rows x 47 columns]
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:112: UserWarning: Features [40 42] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:113: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+std_speed
+std_x_acc
+std_acc
+std_jerk
+min_x_acc
+min_y_acc
+min_acc
+max_x_speed
+max_speed
+max_x_acc
+> Starting svc...
+Classification report:
+              precision    recall  f1-score   support
+
+           4       0.92      0.95      0.94     19586
+          13       0.95      0.91      0.93     17608
+
+    accuracy                           0.93     37194
+   macro avg       0.93      0.93      0.93     37194
+weighted avg       0.93      0.93      0.93     37194
+
+Best clf: SVC(C=10, max_iter=1000000, random_state=0)
+Best params: {'C': 10, 'gamma': 'scale'}
+synth_data/extracted_features_len_64_d2/user_5_extracted_64_d2.csv
+> splitting data for subjects:
+synth_data/extracted_features_len_64_d2/user_13_extracted_64_d2.csv
+synth_data/extracted_features_len_64_d2/user_5_extracted_64_d2.csv
+2765809
+5856620
+   ID  mean_x_speed  ...  numCritPoints  button_press_time
+2  13   -521.055120  ...             15       1.677263e+09
+3  13   -530.987901  ...             14       1.677263e+09
+4  13   -521.056246  ...             13       1.677263e+09
+5  13   -513.109926  ...             12       1.677263e+09
+6  13   -493.267064  ...             12       1.677263e+09
+
+[5 rows x 47 columns]
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:112: UserWarning: Features [40 42] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:113: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+std_x_acc
+std_y_acc
+std_acc
+std_jerk
+min_x_acc
+min_y_acc
+min_acc
+max_y_acc
+max_jerk
+numCritPoints
+> Starting svc...
+Classification report:
+              precision    recall  f1-score   support
+
+           5       0.84      0.95      0.89     32100
+          13       0.89      0.66      0.76     17499
+
+    accuracy                           0.85     49599
+   macro avg       0.86      0.81      0.83     49599
+weighted avg       0.86      0.85      0.85     49599
+
+Best clf: SVC(C=10, max_iter=1000000, random_state=0)
+Best params: {'C': 10, 'gamma': 'scale'}
+synth_data/extracted_features_len_64_d2/user_6_extracted_64_d2.csv
+> splitting data for subjects:
+synth_data/extracted_features_len_64_d2/user_13_extracted_64_d2.csv
+synth_data/extracted_features_len_64_d2/user_6_extracted_64_d2.csv
+2765809
+4180385
+   ID  mean_x_speed  ...  numCritPoints  button_press_time
+2  13   -521.055120  ...             15       1.677263e+09
+3  13   -530.987901  ...             14       1.677263e+09
+4  13   -521.056246  ...             13       1.677263e+09
+5  13   -513.109926  ...             12       1.677263e+09
+6  13   -493.267064  ...             12       1.677263e+09
+
+[5 rows x 47 columns]
+std_y_speed
+std_y_acc
+min_y_speed
+min_y_acc
+min_acc
+min_jerk
+max_speed
+max_y_acc
+max_jerk
+button_press_time
+> Starting svc...
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:112: UserWarning: Features [40 42] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:113: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+Classification report:
+              precision    recall  f1-score   support
+
+           6       1.00      1.00      1.00     22909
+          13       1.00      1.00      1.00     17547
+
+    accuracy                           1.00     40456
+   macro avg       1.00      1.00      1.00     40456
+weighted avg       1.00      1.00      1.00     40456
+
+Best clf: SVC(C=0.1, max_iter=1000000, random_state=0)
+Best params: {'C': 0.1, 'gamma': 'scale'}
+synth_data/extracted_features_len_64_d2/user_7_extracted_64_d2.csv
+> splitting data for subjects:
+synth_data/extracted_features_len_64_d2/user_13_extracted_64_d2.csv
+synth_data/extracted_features_len_64_d2/user_7_extracted_64_d2.csv
+2765809
+2944700
+   ID  mean_x_speed  ...  numCritPoints  button_press_time
+2  13   -521.055120  ...             15       1.677263e+09
+3  13   -530.987901  ...             14       1.677263e+09
+4  13   -521.056246  ...             13       1.677263e+09
+5  13   -513.109926  ...             12       1.677263e+09
+6  13   -493.267064  ...             12       1.677263e+09
+
+[5 rows x 47 columns]
+std_x_acc
+std_acc
+std_jerk
+min_x_acc
+min_acc
+min_jerk
+max_x_acc
+max_acc
+max_jerk
+button_press_time
+> Starting svc...
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:112: UserWarning: Features [40 42] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:113: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+Classification report:
+              precision    recall  f1-score   support
+
+           7       1.00      1.00      1.00     16069
+          13       1.00      1.00      1.00     17647
+
+    accuracy                           1.00     33716
+   macro avg       1.00      1.00      1.00     33716
+weighted avg       1.00      1.00      1.00     33716
+
+Best clf: SVC(C=0.1, max_iter=1000000, random_state=0)
+Best params: {'C': 0.1, 'gamma': 'scale'}
+synth_data/extracted_features_len_64_d2/user_8_extracted_64_d2.csv
+> splitting data for subjects:
+synth_data/extracted_features_len_64_d2/user_13_extracted_64_d2.csv
+synth_data/extracted_features_len_64_d2/user_8_extracted_64_d2.csv
+2765809
+4517205
+   ID  mean_x_speed  ...  numCritPoints  button_press_time
+2  13   -521.055120  ...             15       1.677263e+09
+3  13   -530.987901  ...             14       1.677263e+09
+4  13   -521.056246  ...             13       1.677263e+09
+5  13   -513.109926  ...             12       1.677263e+09
+6  13   -493.267064  ...             12       1.677263e+09
+
+[5 rows x 47 columns]
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:112: UserWarning: Features [40 42] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:113: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+std_y_acc
+std_acc
+std_jerk
+min_y_acc
+min_acc
+min_jerk
+max_y_acc
+max_acc
+max_jerk
+button_press_time
+> Starting svc...
+Classification report:
+              precision    recall  f1-score   support
+
+           8       1.00      1.00      1.00     24732
+          13       1.00      1.00      1.00     17561
+
+    accuracy                           1.00     42293
+   macro avg       1.00      1.00      1.00     42293
+weighted avg       1.00      1.00      1.00     42293
+
+Best clf: SVC(C=0.1, max_iter=1000000, random_state=0)
+Best params: {'C': 0.1, 'gamma': 'scale'}
+synth_data/extracted_features_len_64_d2/user_9_extracted_64_d2.csv
+> splitting data for subjects:
+synth_data/extracted_features_len_64_d2/user_13_extracted_64_d2.csv
+synth_data/extracted_features_len_64_d2/user_9_extracted_64_d2.csv
+2765809
+4162840
+   ID  mean_x_speed  ...  numCritPoints  button_press_time
+2  13   -521.055120  ...             15       1.677263e+09
+3  13   -530.987901  ...             14       1.677263e+09
+4  13   -521.056246  ...             13       1.677263e+09
+5  13   -513.109926  ...             12       1.677263e+09
+6  13   -493.267064  ...             12       1.677263e+09
+
+[5 rows x 47 columns]
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:112: UserWarning: Features [40 42] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/home/taxborn/Documents/Code/mauth-research-project/venv/lib/python3.10/site-packages/sklearn/feature_selection/_univariate_selection.py:113: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+std_y_acc
+std_acc
+std_jerk
+min_x_acc
+min_acc
+min_jerk
+max_y_acc
+max_acc
+max_jerk
+button_press_time
+> Starting svc...
+Classification report:
+              precision    recall  f1-score   support
+
+           9       1.00      1.00      1.00     22821
+          13       1.00      1.00      1.00     17539
+
+    accuracy                           1.00     40360
+   macro avg       1.00      1.00      1.00     40360
+weighted avg       1.00      1.00      1.00     40360
+
+Best clf: SVC(C=0.1, max_iter=1000000, random_state=0)
+Best params: {'C': 0.1, 'gamma': 'scale'}
+
+Process finished with exit code 0
