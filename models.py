@@ -8,6 +8,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.svm import SVC, LinearSVC
 from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.metrics import classification_report
 
 
 def dump_dataset(dataset, outfile):
@@ -121,10 +122,14 @@ def dt(X_train, X_test, y_train):
     model.fit(X_train, y_train)
     return model.predict(X_test)
 
+def evaluation( y_pred, y_val):
+    report = classification_report(y_val,y_pred , output_dict=True)
 
+    return report
 def main():
     # Save timings for averages
     accuracies = []
+    f1Score = []
 
     # Loop over the subjects
     for subject in range(constants.SUBJECTS):
@@ -135,6 +140,9 @@ def main():
 
         # Run KNN which returns the accuracy of the model.
         y_pred = knn(X_train, X_test, y_train)
+
+        report = evaluation(y_pred,y_test)
+        f1Score.append(report["0.0"]["f1-score"])
 
         ##############################################
         # Statistics about the model
@@ -155,10 +163,12 @@ def main():
         print(f"> accuracy = {acc}% {fpr = }% {fnr = }%")
 
     acc_avg = round(sum(accuracies) / constants.SUBJECTS, constants.NUM_ROUNDING)
+    f1_avg = round(sum(f1Score) / constants.SUBJECTS, constants.NUM_ROUNDING)
 
     # Print the statistics, this is the new f-string (or format string) syntax that was introduced in Python 3.6
     print(f"{' kNN Finished! ':-^{constants.MESSAGE_WIDTH}}")
     print(f"{f'average accuracy: {acc_avg}%':^{constants.MESSAGE_WIDTH}}")
+    print(f"{f'average accuracy: {f1_avg}':^{constants.MESSAGE_WIDTH}}")
 
 
 if __name__ == "__main__":
