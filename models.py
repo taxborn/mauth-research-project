@@ -216,22 +216,25 @@ def dt(X_train, X_test, y_train):
     print(f"Fit took: {(time.time() - start) / 60} minutes")
     return prediction
 
-
-def knn_run():
+def evaluation(model):
     # Save timings for averages
     accuracies = []
+    f1score= []
 
     # Loop over the subjects
     for subject in range(constants.SUBJECTS):
-        print(f"{f'k-Nearest Neighbors ({subject + 1} / {constants.SUBJECTS})':-^{constants.MESSAGE_WIDTH}}")
         # Split the dataset with the current subject
-        X_train, X_test, y_train, y_test = process("synth_data/extracted_features_data/user_all_extracted_data.csv",
-                                                   subject)
-        print(f"> starting knn...")
+        X_train, X_test, y_train, y_test = process("synth_data/extracted_features_data/user_all_extracted_data.csv", subject)
+        print(f"> starting {model}...")
 
         # Run KNN which returns the accuracy of the model.
-        y_pred = knn(X_train, X_test, y_train)
-
+        y_pred = model(X_train, X_test, y_train)
+        # report just to get f1score
+        report = classification_report(y_test, y_pred, output_dict=True)
+        f1score.append(report["0.0"]["f1-score"])
+        # report for the whole scores
+        report2 = classification_report(y_test, y_pred)
+        print(report2)
         ##############################################
         # Statistics about the model
         ##############################################
@@ -251,10 +254,12 @@ def knn_run():
         print(f"> accuracy = {acc}% {fpr = }% {fnr = }%")
 
     acc_avg = round(sum(accuracies) / constants.SUBJECTS, constants.NUM_ROUNDING)
+    f1_avg = round(sum(f1score) / constants.SUBJECTS, constants.NUM_ROUNDING)
 
     # Print the statistics, this is the new f-string (or format string) syntax that was introduced in Python 3.6
-    print(f"{' kNN Finished! ':-^{constants.MESSAGE_WIDTH}}")
+    print(f"{f' {model} Finished! ':-^{constants.MESSAGE_WIDTH}}")
     print(f"{f'average accuracy: {acc_avg}%':^{constants.MESSAGE_WIDTH}}")
+    print(f"{f'average f1-score: {f1_avg}%':^{constants.MESSAGE_WIDTH}}")
 
 
 def svc_run():
@@ -282,26 +287,10 @@ def svc_run():
             print(out)
 
 
-def dt_run():
-    accuracies = []
-    for subject in range(constants.SUBJECTS):
-        print(f"{f'Decision Tree ({subject + 1} / {constants.SUBJECTS})':-^{constants.MESSAGE_WIDTH}}")
-        # Split the dataset with the current subject
-        X_train, X_test, y_train, y_test = process("synth_data/extracted_features_data/user_all_extracted_data.csv",
-                                                   subject)
-        print(f"> Starting decision tree...")
-
-        # Run KNN which returns the accuracy of the model.
-        y_pred = dt(X_train, X_test, y_train)
-
-        ##############################################
-        # Statistics about the model
-        ##############################################
-        accuracies.append(accuracy_score(y_test, y_pred))
-        print(accuracies)
 
 
 if __name__ == "__main__":
-    svc_run()
+    evaluation("knn")
+    #svc_run()
     # dt_run()
     # knn_run()
