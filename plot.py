@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 def main():
     # to view a certain subjects data, update this value to the desired subject ID
     subject = 0
-    file = f"data/user_{subject}_data.csv"
+    file = f"raw_data/user_{subject}_data.csv"
     # ID,Timestamp,X,Y,Button,Duration
     dataframe = pd.read_csv(file, skiprows=1, names=["ID", "Timestamp", "X", "Y", "Button", "Duration"],
                             usecols=['Timestamp', 'X', 'Y'])
