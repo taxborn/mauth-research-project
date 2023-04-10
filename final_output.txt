@@ -1,0 +1,1077 @@
+C:\Users\taxborn\PycharmProjects\mauthPart2\venv\Scripts\python.exe C:\Users\taxborn\PycharmProjects\mauthPart2\main.py
+
+mAuth Models Run.
+Current parameters:
+Train/Test split: 70.0/30.0
+Random state constant for reproducibility: 0
+Feature file used: ./data/user_all_features_SQ128.csv
+[Sequencing] length used: 128
+[Anomaly detection] Percentage of negative (imposter) data: 50.0%
+Starting processing for subject 0
+> features selected:
+Index(['ID', 'mean_x_speed', 'mean_y_speed', 'mean_speed', 'mean_x_acc',
+       'mean_y_acc', 'mean_acc', 'mean_jerk', 'mean_ang', 'mean_curve',
+       'mean_tan', 'std_x_speed', 'std_y_speed', 'std_speed', 'std_x_acc',
+       'std_y_acc', 'std_acc', 'std_ang', 'std_jerk', 'std_curve', 'std_tan',
+       'min_tan', 'min_x_speed', 'min_y_speed', 'min_speed', 'min_x_acc',
+       'min_y_acc', 'min_acc', 'min_ang', 'min_jerk', 'min_curve',
+       'max_x_speed', 'max_y_speed', 'max_speed', 'max_x_acc', 'max_y_acc',
+       'max_acc', 'max_ang', 'max_jerk', 'max_curve', 'max_tan', 'traj_length',
+       'numCritPoints', 'mean_speed_over_dist', 'std_speed_over_dist',
+       'min_speed_over_dist', 'max_speed_over_dist',
+       'mean_acceleration_over_dist', 'std_acceleration_over_dist',
+       'max_acceleration_over_dist', 'min_acceleration_over_dist',
+       'mean_smoothness', 'std_smoothness', 'min_smoothness', 'max_smoothness',
+       'area_under_curve'],
+      dtype='object')
+------------------- Starting KNN --------------------
+number of events: 103373, k = 3
+> KNN Fit time: 0.01s
+> KNN Predict time: 12.689s
+> KNN Can process 3491.565 events / second
+
+k-Nearest Neighbors subject 0 Validation details:
+Accuracy: 0.972, Precision: 0.963, Recall: 0.982, F1: 0.972
+[[21460   834]
+ [  398 21611]]
+FAR : 0.038 FRR: 0.018 ERR: 0.028
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.96      0.97     22294
+         1.0       0.96      0.98      0.97     22009
+
+    accuracy                           0.97     44303
+   macro avg       0.97      0.97      0.97     44303
+weighted avg       0.97      0.97      0.97     44303
+
+----- Finished k-Nearest Neighbors on subject 0 -----
+Starting processing for subject 1
+------------------- Starting KNN --------------------
+number of events: 109258, k = 3
+> KNN Fit time: 0.01s
+> KNN Predict time: 14.484s
+> KNN Can process 3232.964 events / second
+
+k-Nearest Neighbors subject 1 Validation details:
+Accuracy: 0.979, Precision: 0.968, Recall: 0.989, F1: 0.979
+[[22856   760]
+ [  245 22965]]
+FAR : 0.033 FRR: 0.01 ERR: 0.022
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.97      0.98     23616
+         1.0       0.97      0.99      0.98     23210
+
+    accuracy                           0.98     46826
+   macro avg       0.98      0.98      0.98     46826
+weighted avg       0.98      0.98      0.98     46826
+
+----- Finished k-Nearest Neighbors on subject 1 -----
+Starting processing for subject 2
+------------------- Starting KNN --------------------
+number of events: 86220, k = 3
+> KNN Fit time: 0.008s
+> KNN Predict time: 9.315s
+> KNN Can process 3967.06 events / second
+
+k-Nearest Neighbors subject 2 Validation details:
+Accuracy: 0.975, Precision: 0.97, Recall: 0.981, F1: 0.975
+[[17953   567]
+ [  356 18076]]
+FAR : 0.031 FRR: 0.019 ERR: 0.025
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.97      0.97     18520
+         1.0       0.97      0.98      0.98     18432
+
+    accuracy                           0.98     36952
+   macro avg       0.98      0.98      0.98     36952
+weighted avg       0.98      0.98      0.98     36952
+
+----- Finished k-Nearest Neighbors on subject 2 -----
+Starting processing for subject 3
+------------------- Starting KNN --------------------
+number of events: 95975, k = 3
+> KNN Fit time: 0.008s
+> KNN Predict time: 11.531s
+> KNN Can process 3567.023 events / second
+
+k-Nearest Neighbors subject 3 Validation details:
+Accuracy: 0.978, Precision: 0.969, Recall: 0.988, F1: 0.978
+[[20076   637]
+ [  252 20168]]
+FAR : 0.031 FRR: 0.012 ERR: 0.022
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.97      0.98     20713
+         1.0       0.97      0.99      0.98     20420
+
+    accuracy                           0.98     41133
+   macro avg       0.98      0.98      0.98     41133
+weighted avg       0.98      0.98      0.98     41133
+
+----- Finished k-Nearest Neighbors on subject 3 -----
+Starting processing for subject 4
+------------------- Starting KNN --------------------
+number of events: 91096, k = 3
+> KNN Fit time: 0.01s
+> KNN Predict time: 10.597s
+> KNN Can process 3684.136 events / second
+
+k-Nearest Neighbors subject 4 Validation details:
+Accuracy: 0.97, Precision: 0.956, Recall: 0.986, F1: 0.971
+[[18723   888]
+ [  273 19158]]
+FAR : 0.047 FRR: 0.014 ERR: 0.03
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.95      0.97     19611
+         1.0       0.96      0.99      0.97     19431
+
+    accuracy                           0.97     39042
+   macro avg       0.97      0.97      0.97     39042
+weighted avg       0.97      0.97      0.97     39042
+
+----- Finished k-Nearest Neighbors on subject 4 -----
+Starting processing for subject 5
+------------------- Starting KNN --------------------
+number of events: 148985, k = 3
+> KNN Fit time: 0.012s
+> KNN Predict time: 28.254s
+> KNN Can process 2259.876 events / second
+
+k-Nearest Neighbors subject 5 Validation details:
+Accuracy: 0.98, Precision: 0.97, Recall: 0.99, F1: 0.98
+[[31014   988]
+ [  307 31542]]
+FAR : 0.032 FRR: 0.009 ERR: 0.02
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.97      0.98     32002
+         1.0       0.97      0.99      0.98     31849
+
+    accuracy                           0.98     63851
+   macro avg       0.98      0.98      0.98     63851
+weighted avg       0.98      0.98      0.98     63851
+
+----- Finished k-Nearest Neighbors on subject 5 -----
+Starting processing for subject 6
+------------------- Starting KNN --------------------
+number of events: 106318, k = 3
+> KNN Fit time: 0.01s
+> KNN Predict time: 14.638s
+> KNN Can process 3112.81 events / second
+
+k-Nearest Neighbors subject 6 Validation details:
+Accuracy: 0.972, Precision: 0.963, Recall: 0.981, F1: 0.972
+[[22160   853]
+ [  426 22127]]
+FAR : 0.038 FRR: 0.019 ERR: 0.028
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.96      0.97     23013
+         1.0       0.96      0.98      0.97     22553
+
+    accuracy                           0.97     45566
+   macro avg       0.97      0.97      0.97     45566
+weighted avg       0.97      0.97      0.97     45566
+
+----- Finished k-Nearest Neighbors on subject 6 -----
+Starting processing for subject 7
+------------------- Starting KNN --------------------
+number of events: 74865, k = 3
+> KNN Fit time: 0.006s
+> KNN Predict time: 7.142s
+> KNN Can process 4492.311 events / second
+
+k-Nearest Neighbors subject 7 Validation details:
+Accuracy: 0.966, Precision: 0.945, Recall: 0.988, F1: 0.966
+[[15266   907]
+ [  192 15720]]
+FAR : 0.059 FRR: 0.012 ERR: 0.036
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.94      0.97     16173
+         1.0       0.95      0.99      0.97     15912
+
+    accuracy                           0.97     32085
+   macro avg       0.97      0.97      0.97     32085
+weighted avg       0.97      0.97      0.97     32085
+
+----- Finished k-Nearest Neighbors on subject 7 -----
+Starting processing for subject 8
+------------------- Starting KNN --------------------
+number of events: 114891, k = 3
+> KNN Fit time: 0.009s
+> KNN Predict time: 16.756s
+> KNN Can process 2938.583 events / second
+
+k-Nearest Neighbors subject 8 Validation details:
+Accuracy: 0.978, Precision: 0.969, Recall: 0.988, F1: 0.978
+[[24044   773]
+ [  305 24117]]
+FAR : 0.032 FRR: 0.012 ERR: 0.022
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.97      0.98     24817
+         1.0       0.97      0.99      0.98     24422
+
+    accuracy                           0.98     49239
+   macro avg       0.98      0.98      0.98     49239
+weighted avg       0.98      0.98      0.98     49239
+
+----- Finished k-Nearest Neighbors on subject 8 -----
+Starting processing for subject 9
+------------------- Starting KNN --------------------
+number of events: 105872, k = 3
+> KNN Fit time: 0.01s
+> KNN Predict time: 14.249s
+> KNN Can process 3184.286 events / second
+
+k-Nearest Neighbors subject 9 Validation details:
+Accuracy: 0.975, Precision: 0.962, Recall: 0.989, F1: 0.975
+[[22016   869]
+ [  250 22239]]
+FAR : 0.039 FRR: 0.011 ERR: 0.025
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.96      0.98     22885
+         1.0       0.96      0.99      0.98     22489
+
+    accuracy                           0.98     45374
+   macro avg       0.98      0.98      0.98     45374
+weighted avg       0.98      0.98      0.98     45374
+
+----- Finished k-Nearest Neighbors on subject 9 -----
+Starting processing for subject 10
+------------------- Starting KNN --------------------
+number of events: 108200, k = 3
+> KNN Fit time: 0.008s
+> KNN Predict time: 14.822s
+> KNN Can process 3128.632 events / second
+
+k-Nearest Neighbors subject 10 Validation details:
+Accuracy: 0.974, Precision: 0.968, Recall: 0.981, F1: 0.974
+[[22726   747]
+ [  436 22463]]
+FAR : 0.032 FRR: 0.019 ERR: 0.026
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.97      0.97     23473
+         1.0       0.97      0.98      0.97     22899
+
+    accuracy                           0.97     46372
+   macro avg       0.97      0.97      0.97     46372
+weighted avg       0.97      0.97      0.97     46372
+
+---- Finished k-Nearest Neighbors on subject 10 -----
+Starting processing for subject 11
+------------------- Starting KNN --------------------
+number of events: 111745, k = 3
+> KNN Fit time: 0.011s
+> KNN Predict time: 16.338s
+> KNN Can process 2931.183 events / second
+
+k-Nearest Neighbors subject 11 Validation details:
+Accuracy: 0.978, Precision: 0.967, Recall: 0.99, F1: 0.978
+[[23350   802]
+ [  234 23505]]
+FAR : 0.034 FRR: 0.01 ERR: 0.022
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.97      0.98     24152
+         1.0       0.97      0.99      0.98     23739
+
+    accuracy                           0.98     47891
+   macro avg       0.98      0.98      0.98     47891
+weighted avg       0.98      0.98      0.98     47891
+
+---- Finished k-Nearest Neighbors on subject 11 -----
+Starting processing for subject 12
+------------------- Starting KNN --------------------
+number of events: 108476, k = 3
+> KNN Fit time: 0.01s
+> KNN Predict time: 15.013s
+> KNN Can process 3096.619 events / second
+
+k-Nearest Neighbors subject 12 Validation details:
+Accuracy: 0.976, Precision: 0.962, Recall: 0.991, F1: 0.976
+[[22597   909]
+ [  197 22787]]
+FAR : 0.04 FRR: 0.008 ERR: 0.024
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.96      0.98     23506
+         1.0       0.96      0.99      0.98     22984
+
+    accuracy                           0.98     46490
+   macro avg       0.98      0.98      0.98     46490
+weighted avg       0.98      0.98      0.98     46490
+
+---- Finished k-Nearest Neighbors on subject 12 -----
+Starting processing for subject 13
+------------------- Starting KNN --------------------
+number of events: 82296, k = 3
+> KNN Fit time: 0.007s
+> KNN Predict time: 8.61s
+> KNN Can process 4096.409 events / second
+
+k-Nearest Neighbors subject 13 Validation details:
+Accuracy: 0.973, Precision: 0.964, Recall: 0.983, F1: 0.973
+[[16998   647]
+ [  305 17320]]
+FAR : 0.037 FRR: 0.017 ERR: 0.027
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.96      0.97     17645
+         1.0       0.96      0.98      0.97     17625
+
+    accuracy                           0.97     35270
+   macro avg       0.97      0.97      0.97     35270
+weighted avg       0.97      0.97      0.97     35270
+
+---- Finished k-Nearest Neighbors on subject 13 -----
+Starting processing for subject 14
+------------------- Starting KNN --------------------
+number of events: 119931, k = 3
+> KNN Fit time: 0.012s
+> KNN Predict time: 18.051s
+> KNN Can process 2847.421 events / second
+
+k-Nearest Neighbors subject 14 Validation details:
+Accuracy: 0.977, Precision: 0.971, Recall: 0.984, F1: 0.977
+[[25175   750]
+ [  418 25056]]
+FAR : 0.029 FRR: 0.016 ERR: 0.022
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.97      0.98     25925
+         1.0       0.97      0.98      0.98     25474
+
+    accuracy                           0.98     51399
+   macro avg       0.98      0.98      0.98     51399
+weighted avg       0.98      0.98      0.98     51399
+
+---- Finished k-Nearest Neighbors on subject 14 -----
+Starting processing for subject 0
+> features selected:
+Index(['ID', 'mean_x_speed', 'mean_y_speed', 'mean_speed', 'mean_x_acc',
+       'mean_y_acc', 'mean_acc', 'mean_jerk', 'mean_ang', 'mean_curve',
+       'mean_tan', 'std_x_speed', 'std_y_speed', 'std_speed', 'std_x_acc',
+       'std_y_acc', 'std_acc', 'std_ang', 'std_jerk', 'std_curve', 'std_tan',
+       'min_tan', 'min_x_speed', 'min_y_speed', 'min_speed', 'min_x_acc',
+       'min_y_acc', 'min_acc', 'min_ang', 'min_jerk', 'min_curve',
+       'max_x_speed', 'max_y_speed', 'max_speed', 'max_x_acc', 'max_y_acc',
+       'max_acc', 'max_ang', 'max_jerk', 'max_curve', 'max_tan', 'traj_length',
+       'numCritPoints', 'mean_speed_over_dist', 'std_speed_over_dist',
+       'min_speed_over_dist', 'max_speed_over_dist',
+       'mean_acceleration_over_dist', 'std_acceleration_over_dist',
+       'max_acceleration_over_dist', 'min_acceleration_over_dist',
+       'mean_smoothness', 'std_smoothness', 'min_smoothness', 'max_smoothness',
+       'area_under_curve'],
+      dtype='object')
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 6.396s
+> Decision Tree Predict time: 0.01s
+> Decision Tree Can process 4647132.749 events / second
+
+Decision Tree subject 0 Validation details:
+Accuracy: 0.965, Precision: 0.956, Recall: 0.974, F1: 0.965
+[[21312   982]
+ [  563 21446]]
+FAR : 0.045 FRR: 0.025 ERR: 0.035
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.97      0.96      0.97     22294
+         1.0       0.96      0.97      0.97     22009
+
+    accuracy                           0.97     44303
+   macro avg       0.97      0.97      0.97     44303
+weighted avg       0.97      0.97      0.97     44303
+
+-------- Finished Decision Tree on subject 0 --------
+Starting processing for subject 1
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 6.086s
+> Decision Tree Predict time: 0.009s
+> Decision Tree Can process 5182670.443 events / second
+
+Decision Tree subject 1 Validation details:
+Accuracy: 0.962, Precision: 0.951, Recall: 0.974, F1: 0.962
+[[22461  1155]
+ [  613 22597]]
+FAR : 0.05 FRR: 0.026 ERR: 0.038
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.97      0.95      0.96     23616
+         1.0       0.95      0.97      0.96     23210
+
+    accuracy                           0.96     46826
+   macro avg       0.96      0.96      0.96     46826
+weighted avg       0.96      0.96      0.96     46826
+
+-------- Finished Decision Tree on subject 1 --------
+Starting processing for subject 2
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 5.81s
+> Decision Tree Predict time: 0.008s
+> Decision Tree Can process 4584763.242 events / second
+
+Decision Tree subject 2 Validation details:
+Accuracy: 0.973, Precision: 0.967, Recall: 0.98, F1: 0.973
+[[17897   623]
+ [  362 18070]]
+FAR : 0.034 FRR: 0.019 ERR: 0.027
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.97      0.97     18520
+         1.0       0.97      0.98      0.97     18432
+
+    accuracy                           0.97     36952
+   macro avg       0.97      0.97      0.97     36952
+weighted avg       0.97      0.97      0.97     36952
+
+-------- Finished Decision Tree on subject 2 --------
+Starting processing for subject 3
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 6.689s
+> Decision Tree Predict time: 0.008s
+> Decision Tree Can process 4919567.322 events / second
+
+Decision Tree subject 3 Validation details:
+Accuracy: 0.966, Precision: 0.957, Recall: 0.975, F1: 0.966
+[[19828   885]
+ [  508 19912]]
+FAR : 0.044 FRR: 0.024 ERR: 0.034
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.96      0.97     20713
+         1.0       0.96      0.98      0.97     20420
+
+    accuracy                           0.97     41133
+   macro avg       0.97      0.97      0.97     41133
+weighted avg       0.97      0.97      0.97     41133
+
+-------- Finished Decision Tree on subject 3 --------
+Starting processing for subject 4
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 5.24s
+> Decision Tree Predict time: 0.008s
+> Decision Tree Can process 4743743.244 events / second
+
+Decision Tree subject 4 Validation details:
+Accuracy: 0.952, Precision: 0.938, Recall: 0.968, F1: 0.953
+[[18362  1249]
+ [  625 18806]]
+FAR : 0.066 FRR: 0.031 ERR: 0.048
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.97      0.94      0.95     19611
+         1.0       0.94      0.97      0.95     19431
+
+    accuracy                           0.95     39042
+   macro avg       0.95      0.95      0.95     39042
+weighted avg       0.95      0.95      0.95     39042
+
+-------- Finished Decision Tree on subject 4 --------
+Starting processing for subject 5
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 11.036s
+> Decision Tree Predict time: 0.014s
+> Decision Tree Can process 4563059.152 events / second
+
+Decision Tree subject 5 Validation details:
+Accuracy: 0.974, Precision: 0.966, Recall: 0.982, F1: 0.974
+[[30913  1089]
+ [  560 31289]]
+FAR : 0.035 FRR: 0.017 ERR: 0.026
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.97      0.97     32002
+         1.0       0.97      0.98      0.97     31849
+
+    accuracy                           0.97     63851
+   macro avg       0.97      0.97      0.97     63851
+weighted avg       0.97      0.97      0.97     63851
+
+-------- Finished Decision Tree on subject 5 --------
+Starting processing for subject 6
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 6.131s
+> Decision Tree Predict time: 0.01s
+> Decision Tree Can process 4547713.41 events / second
+
+Decision Tree subject 6 Validation details:
+Accuracy: 0.972, Precision: 0.964, Recall: 0.979, F1: 0.972
+[[22186   827]
+ [  464 22089]]
+FAR : 0.037 FRR: 0.02 ERR: 0.028
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.96      0.97     23013
+         1.0       0.96      0.98      0.97     22553
+
+    accuracy                           0.97     45566
+   macro avg       0.97      0.97      0.97     45566
+weighted avg       0.97      0.97      0.97     45566
+
+-------- Finished Decision Tree on subject 6 --------
+Starting processing for subject 7
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 4.77s
+> Decision Tree Predict time: 0.006s
+> Decision Tree Can process 5345338.57 events / second
+
+Decision Tree subject 7 Validation details:
+Accuracy: 0.956, Precision: 0.941, Recall: 0.971, F1: 0.956
+[[15209   964]
+ [  454 15458]]
+FAR : 0.062 FRR: 0.028 ERR: 0.045
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.97      0.94      0.96     16173
+         1.0       0.94      0.97      0.96     15912
+
+    accuracy                           0.96     32085
+   macro avg       0.96      0.96      0.96     32085
+weighted avg       0.96      0.96      0.96     32085
+
+-------- Finished Decision Tree on subject 7 --------
+Starting processing for subject 8
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 7.088s
+> Decision Tree Predict time: 0.01s
+> Decision Tree Can process 4927429.071 events / second
+
+Decision Tree subject 8 Validation details:
+Accuracy: 0.972, Precision: 0.963, Recall: 0.981, F1: 0.972
+[[23905   912]
+ [  455 23967]]
+FAR : 0.037 FRR: 0.018 ERR: 0.027
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.96      0.97     24817
+         1.0       0.96      0.98      0.97     24422
+
+    accuracy                           0.97     49239
+   macro avg       0.97      0.97      0.97     49239
+weighted avg       0.97      0.97      0.97     49239
+
+-------- Finished Decision Tree on subject 8 --------
+Starting processing for subject 9
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 7.021s
+> Decision Tree Predict time: 0.01s
+> Decision Tree Can process 4537404.327 events / second
+
+Decision Tree subject 9 Validation details:
+Accuracy: 0.958, Precision: 0.943, Recall: 0.974, F1: 0.958
+[[21560  1325]
+ [  591 21898]]
+FAR : 0.06 FRR: 0.025 ERR: 0.042
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.97      0.94      0.96     22885
+         1.0       0.94      0.97      0.96     22489
+
+    accuracy                           0.96     45374
+   macro avg       0.96      0.96      0.96     45374
+weighted avg       0.96      0.96      0.96     45374
+
+-------- Finished Decision Tree on subject 9 --------
+Starting processing for subject 10
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 7.798s
+> Decision Tree Predict time: 0.01s
+> Decision Tree Can process 4636872.767 events / second
+
+Decision Tree subject 10 Validation details:
+Accuracy: 0.969, Precision: 0.96, Recall: 0.978, F1: 0.969
+[[22539   934]
+ [  505 22394]]
+FAR : 0.041 FRR: 0.022 ERR: 0.032
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.96      0.97     23473
+         1.0       0.96      0.98      0.97     22899
+
+    accuracy                           0.97     46372
+   macro avg       0.97      0.97      0.97     46372
+weighted avg       0.97      0.97      0.97     46372
+
+------- Finished Decision Tree on subject 10 --------
+Starting processing for subject 11
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 7.358s
+> Decision Tree Predict time: 0.01s
+> Decision Tree Can process 4704973.013 events / second
+
+Decision Tree subject 11 Validation details:
+Accuracy: 0.961, Precision: 0.949, Recall: 0.975, F1: 0.962
+[[22897  1255]
+ [  590 23149]]
+FAR : 0.053 FRR: 0.024 ERR: 0.038
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.97      0.95      0.96     24152
+         1.0       0.95      0.98      0.96     23739
+
+    accuracy                           0.96     47891
+   macro avg       0.96      0.96      0.96     47891
+weighted avg       0.96      0.96      0.96     47891
+
+------- Finished Decision Tree on subject 11 --------
+Starting processing for subject 12
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 7.285s
+> Decision Tree Predict time: 0.01s
+> Decision Tree Can process 4645349.556 events / second
+
+Decision Tree subject 12 Validation details:
+Accuracy: 0.967, Precision: 0.956, Recall: 0.979, F1: 0.967
+[[22471  1035]
+ [  481 22503]]
+FAR : 0.045 FRR: 0.02 ERR: 0.032
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.96      0.97     23506
+         1.0       0.96      0.98      0.97     22984
+
+    accuracy                           0.97     46490
+   macro avg       0.97      0.97      0.97     46490
+weighted avg       0.97      0.97      0.97     46490
+
+------- Finished Decision Tree on subject 12 --------
+Starting processing for subject 13
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 5.133s
+> Decision Tree Predict time: 0.008s
+> Decision Tree Can process 4402377.826 events / second
+
+Decision Tree subject 13 Validation details:
+Accuracy: 0.974, Precision: 0.969, Recall: 0.98, F1: 0.975
+[[17095   550]
+ [  350 17275]]
+FAR : 0.032 FRR: 0.02 ERR: 0.026
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.97      0.97     17645
+         1.0       0.97      0.98      0.97     17625
+
+    accuracy                           0.97     35270
+   macro avg       0.97      0.97      0.97     35270
+weighted avg       0.97      0.97      0.97     35270
+
+------- Finished Decision Tree on subject 13 --------
+Starting processing for subject 14
+-------------------- Starting DT --------------------
+> Decision Tree Fit time: 8.463s
+> Decision Tree Predict time: 0.01s
+> Decision Tree Can process 5139904.902 events / second
+
+Decision Tree subject 14 Validation details:
+Accuracy: 0.971, Precision: 0.964, Recall: 0.979, F1: 0.971
+[[25003   922]
+ [  545 24929]]
+FAR : 0.036 FRR: 0.021 ERR: 0.028
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.96      0.97     25925
+         1.0       0.96      0.98      0.97     25474
+
+    accuracy                           0.97     51399
+   macro avg       0.97      0.97      0.97     51399
+weighted avg       0.97      0.97      0.97     51399
+
+------- Finished Decision Tree on subject 14 --------
+Starting processing for subject 1
+Starting processing for subject 4
+Starting processing for subject 0
+> features selected:
+Index(['ID', 'mean_x_speed', 'mean_y_speed', 'mean_speed', 'mean_x_acc',
+       'mean_y_acc', 'mean_acc', 'mean_jerk', 'mean_ang', 'mean_curve',
+       'mean_tan', 'std_x_speed', 'std_y_speed', 'std_speed', 'std_x_acc',
+       'std_y_acc', 'std_acc', 'std_ang', 'std_jerk', 'std_curve', 'std_tan',
+       'min_tan', 'min_x_speed', 'min_y_speed', 'min_speed', 'min_x_acc',
+       'min_y_acc', 'min_acc', 'min_ang', 'min_jerk', 'min_curve',
+       'max_x_speed', 'max_y_speed', 'max_speed', 'max_x_acc', 'max_y_acc',
+       'max_acc', 'max_ang', 'max_jerk', 'max_curve', 'max_tan', 'traj_length',
+       'numCritPoints', 'mean_speed_over_dist', 'std_speed_over_dist',
+       'min_speed_over_dist', 'max_speed_over_dist',
+       'mean_acceleration_over_dist', 'std_acceleration_over_dist',
+       'max_acceleration_over_dist', 'min_acceleration_over_dist',
+       'mean_smoothness', 'std_smoothness', 'min_smoothness', 'max_smoothness',
+       'area_under_curve'],
+      dtype='object')
+Starting processing for subject 6
+Starting processing for subject 7
+Starting processing for subject 2
+Starting processing for subject 3
+Starting processing for subject 5
+------------------- Starting SVC --------------------
+Starting processing for subject 9
+> Feature Scaling time: 0.238s
+Starting processing for subject 8
+------------------- Starting SVC --------------------
+------------------- Starting SVC --------------------
+------------------- Starting SVC --------------------
+------------------- Starting SVC --------------------
+> Feature Scaling time: 0.191s
+> Feature Scaling time: 0.243s
+------------------- Starting SVC --------------------
+> Feature Scaling time: 0.155s
+------------------- Starting SVC --------------------
+> Feature Scaling time: 0.238s
+------------------- Starting SVC --------------------
+> Feature Scaling time: 0.192s
+> Feature Scaling time: 0.179s
+> Feature Scaling time: 0.167s
+------------------- Starting SVC --------------------
+------------------- Starting SVC --------------------
+> Feature Scaling time: 0.159s
+> Feature Scaling time: 0.214s
+> SVC Fit time: 1840.246s
+> SVC Fit time: 1910.548s
+> SVC Predict time: 85.09s
+> SVC Can process 434.267 events / second
+
+SVC subject 2 Validation details:
+Accuracy: 0.968, Precision: 0.949, Recall: 0.988, F1: 0.968
+[[17547   973]
+ [  223 18209]]
+FAR : 0.055 FRR: 0.012 ERR: 0.034
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.95      0.97     18520
+         1.0       0.95      0.99      0.97     18432
+
+    accuracy                           0.97     36952
+   macro avg       0.97      0.97      0.97     36952
+weighted avg       0.97      0.97      0.97     36952
+
+------------- Finished SVC on subject 2 -------------
+Starting processing for subject 10
+------------------- Starting SVC --------------------
+> Feature Scaling time: 0.182s
+> SVC Predict time: 102.682s
+> SVC Can process 312.468 events / second
+
+SVC subject 7 Validation details:
+Accuracy: 0.943, Precision: 0.905, Recall: 0.988, F1: 0.945
+[[14522  1651]
+ [  185 15727]]
+FAR : 0.112 FRR: 0.011 ERR: 0.062
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.90      0.94     16173
+         1.0       0.90      0.99      0.94     15912
+
+    accuracy                           0.94     32085
+   macro avg       0.95      0.94      0.94     32085
+weighted avg       0.95      0.94      0.94     32085
+
+------------- Finished SVC on subject 7 -------------
+Starting processing for subject 11
+------------------- Starting SVC --------------------
+> Feature Scaling time: 0.188s
+> SVC Fit time: 2954.971s
+> SVC Fit time: 2966.835s
+> SVC Predict time: 144.549s
+> SVC Can process 270.095 events / second
+
+SVC subject 4 Validation details:
+Accuracy: 0.94, Precision: 0.902, Recall: 0.987, F1: 0.943
+[[17538  2073]
+ [  260 19171]]
+FAR : 0.116 FRR: 0.012 ERR: 0.064
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.89      0.94     19611
+         1.0       0.90      0.99      0.94     19431
+
+    accuracy                           0.94     39042
+   macro avg       0.94      0.94      0.94     39042
+weighted avg       0.94      0.94      0.94     39042
+
+------------- Finished SVC on subject 4 -------------
+> SVC Predict time: 133.379s
+> SVC Can process 332.159 events / second
+
+SVC subject 0 Validation details:
+Accuracy: 0.962, Precision: 0.94, Recall: 0.987, F1: 0.963
+[[20911  1383]
+ [  289 21720]]
+FAR : 0.065 FRR: 0.013 ERR: 0.039
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.94      0.96     22294
+         1.0       0.94      0.99      0.96     22009
+
+    accuracy                           0.96     44303
+   macro avg       0.96      0.96      0.96     44303
+weighted avg       0.96      0.96      0.96     44303
+
+------------- Finished SVC on subject 0 -------------
+Starting processing for subject 12
+------------------- Starting SVC --------------------
+> Feature Scaling time: 0.166s
+> SVC Fit time: 3116.817s
+Starting processing for subject 13
+------------------- Starting SVC --------------------
+> Feature Scaling time: 0.134s
+> SVC Fit time: 3221.059s
+> SVC Predict time: 146.164s
+> SVC Can process 311.747 events / second
+
+SVC subject 6 Validation details:
+Accuracy: 0.963, Precision: 0.938, Recall: 0.991, F1: 0.964
+[[21528  1485]
+ [  207 22346]]
+FAR : 0.068 FRR: 0.009 ERR: 0.038
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.94      0.96     23013
+         1.0       0.94      0.99      0.96     22553
+
+    accuracy                           0.96     45566
+   macro avg       0.96      0.96      0.96     45566
+weighted avg       0.96      0.96      0.96     45566
+
+------------- Finished SVC on subject 6 -------------
+Starting processing for subject 14
+------------------- Starting SVC --------------------
+> Feature Scaling time: 0.133s
+> SVC Predict time: 155.433s
+> SVC Can process 301.262 events / second
+
+SVC subject 1 Validation details:
+Accuracy: 0.961, Precision: 0.937, Recall: 0.988, F1: 0.962
+[[22067  1549]
+ [  283 22927]]
+FAR : 0.069 FRR: 0.012 ERR: 0.04
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.93      0.96     23616
+         1.0       0.94      0.99      0.96     23210
+
+    accuracy                           0.96     46826
+   macro avg       0.96      0.96      0.96     46826
+weighted avg       0.96      0.96      0.96     46826
+
+------------- Finished SVC on subject 1 -------------
+> SVC Fit time: 3531.324s
+> SVC Predict time: 151.123s
+> SVC Can process 272.182 events / second
+
+SVC subject 3 Validation details:
+Accuracy: 0.952, Precision: 0.93, Recall: 0.976, F1: 0.953
+[[19217  1496]
+ [  490 19930]]
+FAR : 0.076 FRR: 0.023 ERR: 0.05
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.93      0.95     20713
+         1.0       0.93      0.98      0.95     20420
+
+    accuracy                           0.95     41133
+   macro avg       0.95      0.95      0.95     41133
+weighted avg       0.95      0.95      0.95     41133
+
+------------- Finished SVC on subject 3 -------------
+> SVC Fit time: 3740.688s
+> SVC Predict time: 147.896s
+> SVC Can process 332.93 events / second
+
+SVC subject 8 Validation details:
+Accuracy: 0.966, Precision: 0.947, Recall: 0.986, F1: 0.966
+[[23481  1336]
+ [  354 24068]]
+FAR : 0.056 FRR: 0.014 ERR: 0.035
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.95      0.97     24817
+         1.0       0.95      0.99      0.97     24422
+
+    accuracy                           0.97     49239
+   macro avg       0.97      0.97      0.97     49239
+weighted avg       0.97      0.97      0.97     49239
+
+------------- Finished SVC on subject 8 -------------
+> SVC Fit time: 1208.269s
+> SVC Predict time: 40.472s
+> SVC Can process 871.456 events / second
+
+SVC subject 13 Validation details:
+Accuracy: 0.977, Precision: 0.963, Recall: 0.993, F1: 0.978
+[[16980   665]
+ [  132 17493]]
+FAR : 0.039 FRR: 0.007 ERR: 0.023
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.96      0.98     17645
+         1.0       0.96      0.99      0.98     17625
+
+    accuracy                           0.98     35270
+   macro avg       0.98      0.98      0.98     35270
+weighted avg       0.98      0.98      0.98     35270
+
+------------ Finished SVC on subject 13 -------------
+> SVC Fit time: 4657.845s
+> SVC Predict time: 141.2s
+> SVC Can process 321.346 events / second
+
+SVC subject 9 Validation details:
+Accuracy: 0.932, Precision: 0.895, Recall: 0.977, F1: 0.934
+[[20309  2576]
+ [  515 21974]]
+FAR : 0.124 FRR: 0.021 ERR: 0.072
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.89      0.93     22885
+         1.0       0.90      0.98      0.93     22489
+
+    accuracy                           0.93     45374
+   macro avg       0.94      0.93      0.93     45374
+weighted avg       0.94      0.93      0.93     45374
+
+------------- Finished SVC on subject 9 -------------
+> SVC Fit time: 3503.107s
+> SVC Fit time: 2422.128s
+> SVC Predict time: 99.985s
+> SVC Can process 463.792 events / second
+
+SVC subject 10 Validation details:
+Accuracy: 0.949, Precision: 0.916, Recall: 0.988, F1: 0.951
+[[21395  2078]
+ [  274 22625]]
+FAR : 0.096 FRR: 0.011 ERR: 0.054
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.91      0.95     23473
+         1.0       0.92      0.99      0.95     22899
+
+    accuracy                           0.95     46372
+   macro avg       0.95      0.95      0.95     46372
+weighted avg       0.95      0.95      0.95     46372
+
+------------ Finished SVC on subject 10 -------------
+> SVC Predict time: 72.79s
+> SVC Can process 638.683 events / second
+
+SVC subject 12 Validation details:
+Accuracy: 0.964, Precision: 0.937, Recall: 0.994, F1: 0.965
+[[21981  1525]
+ [  149 22835]]
+FAR : 0.069 FRR: 0.006 ERR: 0.038
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.94      0.96     23506
+         1.0       0.94      0.99      0.96     22984
+
+    accuracy                           0.96     46490
+   macro avg       0.97      0.96      0.96     46490
+weighted avg       0.97      0.96      0.96     46490
+
+------------ Finished SVC on subject 12 -------------
+> SVC Fit time: 2514.038s
+> SVC Predict time: 56.54s
+> SVC Can process 909.076 events / second
+
+SVC subject 14 Validation details:
+Accuracy: 0.976, Precision: 0.958, Recall: 0.995, F1: 0.976
+[[24815  1110]
+ [  138 25336]]
+FAR : 0.044 FRR: 0.005 ERR: 0.024
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.99      0.96      0.98     25925
+         1.0       0.96      0.99      0.98     25474
+
+    accuracy                           0.98     51399
+   macro avg       0.98      0.98      0.98     51399
+weighted avg       0.98      0.98      0.98     51399
+
+------------ Finished SVC on subject 14 -------------
+> SVC Fit time: 4077.751s
+> SVC Predict time: 107.845s
+> SVC Can process 444.073 events / second
+
+SVC subject 11 Validation details:
+Accuracy: 0.936, Precision: 0.903, Recall: 0.976, F1: 0.938
+[[21673  2479]
+ [  576 23163]]
+FAR : 0.111 FRR: 0.022 ERR: 0.066
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.97      0.90      0.93     24152
+         1.0       0.90      0.98      0.94     23739
+
+    accuracy                           0.94     47891
+   macro avg       0.94      0.94      0.94     47891
+weighted avg       0.94      0.94      0.94     47891
+
+------------ Finished SVC on subject 11 -------------
+> SVC Fit time: 6451.197s
+> SVC Predict time: 163.116s
+> SVC Can process 391.446 events / second
+
+SVC subject 5 Validation details:
+Accuracy: 0.937, Precision: 0.904, Recall: 0.978, F1: 0.94
+[[28697  3305]
+ [  697 31152]]
+FAR : 0.112 FRR: 0.02 ERR: 0.066
+Report:
+              precision    recall  f1-score   support
+
+         0.0       0.98      0.90      0.93     32002
+         1.0       0.90      0.98      0.94     31849
+
+    accuracy                           0.94     63851
+   macro avg       0.94      0.94      0.94     63851
+weighted avg       0.94      0.94      0.94     63851
+
+------------- Finished SVC on subject 5 -------------
