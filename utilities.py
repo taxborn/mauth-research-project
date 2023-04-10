@@ -2,12 +2,10 @@ import glob
 import os
 import shutil
 import time
-from typing import Any
-
-import numpy as np
-from sklearn.model_selection import GridSearchCV
-
 import constants
+import numpy as np
+from typing import Any
+from sklearn.model_selection import GridSearchCV
 
 
 def create_feature_file():

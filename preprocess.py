@@ -1,17 +1,11 @@
 import copy
-import time
-
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
-
 import constants
-
+import utilities
 from sklearn.model_selection import train_test_split
 from collections import deque
 from scipy.signal import savgol_filter
-
-import utilities
 
 
 def get_negative_data(dataset: pd.DataFrame, subject: int, num_of_samples: int) -> pd.DataFrame:
@@ -65,7 +59,8 @@ def process(feature_file: str, subject: int):
 
     # Concatenate the current subjects data and the other subjects data
     mixed_set = pd.concat([pd.DataFrame(array_positive), pd.DataFrame(array_negative)])
-    # pd.DataFrame(mixed_set).to_csv(f"synth_data/user_{subject}_mixed_data.csv")
+    # If you want to output the binary classifiers, uncomment the following line
+    # mixed_set.to_csv(f"synth_data/binary_classifiers/user_{subject}_mixed_data.csv")
 
     mixed_set = mixed_set.replace([np.inf, -np.inf], 0).to_numpy()
 

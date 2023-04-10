@@ -1,20 +1,21 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.metrics import roc_curve, roc_auc_score
+import constants
+from typing import Any
 from sklearn.metrics import confusion_matrix, accuracy_score, f1_score, precision_score, recall_score, \
     classification_report
 
-import constants
 
-
-def display_validations(X_test, y_test: np.ndarray, y_pred: np.ndarray, model: str, subject: int, classifier):
+def display_validations(X_test: np.ndarray, y_test: np.ndarray, y_pred: np.ndarray, model: str, subject: int,
+                        classifier: Any):
     """
     Generate validation for a given model output.
 
+    :param X_test: The test split of feature data
     :param y_test: The test split for model testing
     :param y_pred: The predicted output for X_test
     :param model: The name of the model, used for printing purposes
     :param subject: Which subject was used, also only used for printing
+    :param classifier: The classifier used in modelling
     :return: None
     """
     accuracy = round(accuracy_score(y_test, y_pred), constants.NUM_ROUNDING)
