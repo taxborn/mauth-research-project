@@ -45,20 +45,24 @@ def display_validations(X_test: np.ndarray, y_test: np.ndarray, y_pred: np.ndarr
 
 def generate_roc(X_test, y_test, classifier):
 
+    # Generate fpr, tpr, and threshold values for each classifier
+    for classifier in classifier:
+        y_pred_proba = classifier.predict_proba(X_test)[:, 1]
+        fpr, tpr, thresholds = roc_curve(y_test, y_pred_proba)
 
+        # Plot ROC curve
+        plt.plot(fpr, tpr, label=type(classifier).__name__)
 
-    # Generate predicted probabilities
-    y_pred_proba = classifier.predict_proba(X_test)[:, 1]
-
-    # Generate fpr, tpr, and threshold values using roc_curve
-    fpr, tpr, thresholds = roc_curve(y_test, y_pred_proba)
-
-    # Plot ROC curve
-    plt.plot(fpr, tpr)
+    # Plot reference line for random classifier
     plt.plot([0, 1], [0, 1], 'r--')
+
+    # Add labels and legend to plot
     plt.title('ROC Curve')
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
+    plt.legend(loc='lower right')
+
+    # Show plot
     plt.show()
 
     # y_pred_probability = classifier.predict_proba(X_test)[::, 1]
