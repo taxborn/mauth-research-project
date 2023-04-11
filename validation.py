@@ -3,6 +3,8 @@ import constants
 from typing import Any
 from sklearn.metrics import confusion_matrix, accuracy_score, f1_score, precision_score, recall_score, \
     classification_report
+from sklearn.metrics import roc_curve
+import matplotlib.pyplot as plt
 
 
 def display_validations(X_test: np.ndarray, y_test: np.ndarray, y_pred: np.ndarray, model: str, subject: int,
@@ -42,6 +44,23 @@ def display_validations(X_test: np.ndarray, y_test: np.ndarray, y_pred: np.ndarr
 
 
 def generate_roc(X_test, y_test, classifier):
+
+
+
+    # Generate predicted probabilities
+    y_pred_proba = classifier.predict_proba(X_test)[:, 1]
+
+    # Generate fpr, tpr, and threshold values using roc_curve
+    fpr, tpr, thresholds = roc_curve(y_test, y_pred_proba)
+
+    # Plot ROC curve
+    plt.plot(fpr, tpr)
+    plt.plot([0, 1], [0, 1], 'r--')
+    plt.title('ROC Curve')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.show()
+
     # y_pred_probability = classifier.predict_proba(X_test)[::, 1]
     # fpr, tpr, _ = roc_curve(y_test, y_pred_probability)
     # auc = round(roc_auc_score(y_test, y_pred_probability), constants.NUM_ROUNDING)
@@ -50,4 +69,4 @@ def generate_roc(X_test, y_test, classifier):
     # plt.xlabel("False positive Rate")
     # plt.legend(loc=4)
     # plt.show()
-    pass
+
