@@ -1,4 +1,6 @@
 import copy
+import time
+
 import numpy as np
 import pandas as pd
 import constants
@@ -32,15 +34,12 @@ def process(feature_file: str, subject: int):
 
     :return: X_train, X_val, y_train, y_val, for use in training models
     """
-    print(f"Starting processing for subject {subject}")
+    print(f"> Starting processing for subject {subject}")
+    start = time.time()
     dataset = pd.read_csv(feature_file)
     # Select only the relevant features we want from the constants file
     if constants.FEATURES is not None:
         dataset = dataset.loc[:, constants.FEATURES]
-
-    # only print once
-    if subject == 0:
-        print(f"> features selected:\n{dataset.columns}")
 
     df = pd.DataFrame(dataset)
     pd.options.display.max_columns = None
@@ -67,6 +66,7 @@ def process(feature_file: str, subject: int):
     X = mixed_set[:, 1:]  # All the features
     y = mixed_set[:, 0]  # The subject ID is the first column
 
+    print(f"> Finished processing for subject {subject}. Took {round(time.time() - start, constants.NUM_ROUNDING)}s")
     # Return the split with constants defined at the top of the file
     return train_test_split(X, y, test_size=constants.TEST_SPLIT, random_state=constants.RANDOM_STATE_CONSTANT)
 

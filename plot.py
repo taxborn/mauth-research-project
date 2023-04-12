@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 
 def main():
     # to view a certain subjects data, update this value to the desired subject ID
-    subject = 0
+    subject = 5
     file = f"raw_data/user_{subject}_data.csv"
     # ID,Timestamp,X,Y,Button,Duration
     dataframe = pd.read_csv(file, skiprows=1, names=["ID", "Timestamp", "X", "Y", "Button", "Duration"],
@@ -22,7 +22,7 @@ def main():
     plt.ylabel('Screen y-coordinates')
     plt.title(f"User {subject}'s mouse path")
     # plot the data
-    plt.plot(x, y, color='#cba6f7')
+    plt.plot(x, y, color='#118ab2')
     # load the plot
     plt.show()
 

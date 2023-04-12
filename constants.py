@@ -11,19 +11,21 @@ SUBJECTS = 15
 MESSAGE_WIDTH = 53
 NUM_ROUNDING = 3
 # Which model(s) to run, either "dt", "rf", "knn", "svc"
-MODELS = ["svc"]
+MODELS = ["knn"]
 
 # -1 for all cores, otherwise specify number of cores. If you're unsure, either 1 or 4 should do well here.
 N_JOBS = -1
 
 SEQUENCE_LENGTH = 128
 CROSS_VALIDATION_STEPS = 5
+USE_GRIDSEARCH = False
 
 # What split we should use for anomaly detection, where the number here
 # represents 1/n of the data should be 'imposter' data. For example, 2
 # here means 1/2 of the dataset would be imposter data. 3 would mean 1/3
 # is imposter data, and so on...
 SPLIT = 2
+VERBOSE = True
 
 """
 Select the features used in the models. The current total set is:
@@ -44,7 +46,8 @@ min_smoothness, max_smoothness, area_under_curve
 The only required field is 'ID' and at least one other feature.
 If this is set to None, the models will use all of the features
 """
-#FEATURES = None
 FEATURES = None
+# FEATURES = ["ID", "area_under_curve", "std_y_speed", "mean_y_speed", "std_smoothness", "mean_smoothness",
+#             "std_acceleration_over_dist", "std_curve", "mean_curve", "std_acc", "mean_acc"]
 FEATURE_FILE = f"./synth_data/user_all_features_SQ{SEQUENCE_LENGTH}.csv"
 RAW_FOLDER_PATH = f"./raw_data/"

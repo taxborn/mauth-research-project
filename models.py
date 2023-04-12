@@ -14,14 +14,13 @@ from utilities import find_best_classifier
 from validation import display_validations
 
 
-def knn(X_train: np.ndarray, X_test: np.ndarray, y_train: np.ndarray, find_best: bool = False) -> np.ndarray:
+def knn(X_train: np.ndarray, X_test: np.ndarray, y_train: np.ndarray) -> np.ndarray:
     """
     k-Nearest Neighbors Classifier.
 
     :param X_train: The training feature set.
     :param X_test: The testing feature set.
     :param y_train: The training subject IDs
-    :param find_best: Option to use GridSearch to find the best classifier hyperparameters.
     :return: The predictions from the KNN Classifier and the classifier used
     """
     print(f"{' Starting KNN ':-^{constants.MESSAGE_WIDTH}}")
@@ -29,13 +28,12 @@ def knn(X_train: np.ndarray, X_test: np.ndarray, y_train: np.ndarray, find_best:
     n = len(y_train)
     k = int(math.sqrt(n))
     k += k % 2 - 1
-    k = 3
-    print(f"number of events: {n}, k = {k}")
 
-    classifier = KNeighborsClassifier(n_neighbors=k, metric='cityblock', n_jobs=constants.N_JOBS)
+    classifier = KNeighborsClassifier(n_neighbors=3, metric='cityblock', n_jobs=constants.N_JOBS)
+    print(f"number of events: {n}, k = {classifier.n_neighbors}")
 
     # KNN Grid search. Used for fine-tuning the hyperparameters.
-    if find_best:
+    if constants.USE_GRIDSEARCH:
         param_grid = {'n_neighbors': [3, 5, 13, 27, k], 'metric': ['euclidean', 'cityblock']}
         classifier = find_best_classifier("KNN", classifier, param_grid, X_train, y_train)
 
@@ -53,21 +51,20 @@ def knn(X_train: np.ndarray, X_test: np.ndarray, y_train: np.ndarray, find_best:
     return y_pred, classifier
 
 
-def dt(X_train: np.ndarray, X_test: np.ndarray, y_train: np.ndarray, find_best: bool = False) -> np.ndarray:
+def dt(X_train: np.ndarray, X_test: np.ndarray, y_train: np.ndarray) -> np.ndarray:
     """
     Decision Tree Classifier.
 
     :param X_train: The training feature set.
     :param X_test: The testing feature set.
     :param y_train: The training subject IDs
-    :param find_best: Option to use GridSearch to find the best classifier hyperparameters.
     :return: The predictions from the Decision Tree Classifier and the classifier itself
     """
     print(f"{' Starting DT ':-^{constants.MESSAGE_WIDTH}}")
     classifier = DecisionTreeClassifier(random_state=constants.RANDOM_STATE_CONSTANT)
 
     # DT Grid search. Used for fine-tuning the hyperparameters.
-    if find_best:
+    if constants.USE_GRIDSEARCH:
         param_grid = {'max_depth': [5, 7, 9, 10], 'min_samples_leaf': [2, 3, 5], 'min_samples_split': [5, 7, 9, 10],
                       'max_features': ["auto", "sqrt", "log2"]}
         classifier = find_best_classifier("Decision Tree", classifier, param_grid, X_train, y_train)
@@ -85,21 +82,20 @@ def dt(X_train: np.ndarray, X_test: np.ndarray, y_train: np.ndarray, find_best: 
     return y_pred, classifier
 
 
-def rf(X_train: np.ndarray, X_test: np.ndarray, y_train: np.ndarray, find_best: bool = False) -> np.ndarray:
+def rf(X_train: np.ndarray, X_test: np.ndarray, y_train: np.ndarray) -> np.ndarray:
     """
     Random Forest Classifier.
 
     :param X_train: The training feature set.
     :param X_test: The testing feature set.
     :param y_train: The training subject IDs
-    :param find_best: Option to use GridSearch to find the best classifier hyperparameters.
     :return: The predictions from the Random Forest Classifier and the classifier itself
     """
     print(f"{' Starting RF ':-^{constants.MESSAGE_WIDTH}}")
-    classifier = RandomForestClassifier(random_state=constants.RANDOM_STATE_CONSTANT)
+    classifier = RandomForestClassifier(random_state=constants.RANDOM_STATE_CONSTANT, verbose=constants.VERBOSE)
 
     # RF Grid search. Used for fine-tuning the hyperparameters.
-    if find_best:
+    if constants.USE_GRIDSEARCH:
         param_grid = {}
         classifier = find_best_classifier("Random Forest", classifier, param_grid, X_train, y_train)
 
@@ -116,7 +112,7 @@ def rf(X_train: np.ndarray, X_test: np.ndarray, y_train: np.ndarray, find_best: 
     return y_pred, classifier
 
 
-def svc(X_train: np.ndarray, X_test: np.ndarray, y_train: np.ndarray, find_best: bool = False) -> np.ndarray:
+def svc(X_train: np.ndarray, X_test: np.ndarray, y_train: np.ndarray) -> np.ndarray:
     """
     Support Vector Classifier.
 
@@ -124,14 +120,13 @@ def svc(X_train: np.ndarray, X_test: np.ndarray, y_train: np.ndarray, find_best:
     :param X_train: The training feature set.
     :param X_test: The testing feature set.
     :param y_train: The training subject IDs
-    :param find_best: Option to use GridSearch to find the best classifier hyperparameters.
     :return: The predictions from the Support Vector Classifier and the classifier itself
     """
     print(f"{' Starting SVC ':-^{constants.MESSAGE_WIDTH}}")
-    classifier = SVC(C=100, gamma="auto", random_state=constants.RANDOM_STATE_CONSTANT)
+    classifier = SVC(C=100, gamma="auto", random_state=constants.RANDOM_STATE_CONSTANT, verbose=constants.VERBOSE)
 
     # SVC Grid search. Used for fine-tuning the hyperparameters.
-    if find_best:
+    if constants.USE_GRIDSEARCH:
         param_grid = {'C': [1, 10, 100, 500], 'gamma': ["auto", "scale"]}
         classifier = find_best_classifier("SVC", classifier, param_grid, X_train, y_train)
 

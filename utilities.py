@@ -55,7 +55,8 @@ def find_best_classifier(model: str, classifier: Any, param_grid: dict[str, Any]
     :return: The classifier with the best set of hyperparameters found. Those hyperparameters are also printed out.
     """
     print(f"> Starting GridSearch for {model}")
-    gridsearch = GridSearchCV(classifier, param_grid, cv=constants.CROSS_VALIDATION_STEPS, n_jobs=constants.N_JOBS)
+    gridsearch = GridSearchCV(classifier, param_grid, cv=constants.CROSS_VALIDATION_STEPS, n_jobs=constants.N_JOBS,
+                              verbose=constants.VERBOSE)
 
     start_time = time.time()
     gridsearch.fit(X_train, y_train)
