@@ -103,6 +103,90 @@ def data_to_df(file_path):
     return df
 
 
+class SequenceMaker:
+    def __init__(self, df):
+        self.df = df
+        self.sequential_data = []
+        self.prev_data = deque(maxlen=constants.SEQUENCE_LENGTH)
+        self.count = 0
+        # Save ID
+        self.ID = int(df.iloc[1]['ID'])
+        # calculate the average of the 'values' column while omitting zeros
+        button_non_zero_values = df.loc[df['Duration'] != 0, 'Duration']
+        self.press_avg = button_non_zero_values.mean()
+
+    def process_data(self):
+        for i in self.df.values:
+            # Append each even row in df to prev_data without 'Subject ID' column, up to 60 rows
+            self.prev_data.append([n for n in i[:-1]])
+            if len(self.prev_data) == constants.SEQUENCE_LENGTH:
+                temp = np.copy(self.prev_data)
+                for j in range(7, 14):
+                    temp[0, j] = 0
+
+            button_press_time = self.calculate_button_press_time()
+
+            area_under_curve = area_under_curve()
+
+    def calculate_button_press_time(self):
+        button_press_time = self.prev_data[1:4].max()
+        return button_press_time
+
+    def calculate_area_under_curve(self):
+        x_values = self.prev_data[1:, 2]
+        y_values = self.prev_data[1:, 3]
+        area_under_curve = np.trapz(y_values, x_values)
+        return area_under_curve
+
+    def calculate_mean_speeds(self):
+        mean_x_speed = self.prev_data[1:, 5].mean()
+        std_x_speed = self.prev_data[1:, 5].std()
+        min_x_speed = self.prev_data[1:, 5].min()
+        max_x_speed = self.prev_data[1:, 5].max()
+
+        mean_y_speed = self.prev_data[1:, 6].mean()
+        std_y_speed = self.prev_data[1:, 6].std()
+        min_y_speed = self.prev_data[1:, 6].min()
+        max_y_speed = self.prev_data[1:, 6].max()
+
+        mean_speed = self.prev_data[1:, 7].mean()
+        std_speed = self.prev_data[1:, 7].std()
+        min_speed = self.prev_data[1:, 7].min()
+        max_speed = self.prev_data[1:, 7].max()
+
+        return mean_x_speed, std_x_speed, min_x_speed, max_x_speed, mean_y_speed, std_y_speed, min_y_speed, max_y_speed, \
+            mean_speed, std_speed, min_speed, max_speed
+
+    def calculate_mean_speed_over_dist(self):
+        dx = np.diff(self.prev_data[1:, 2])
+        dy = np.diff(self.prev_data[1:, 3])
+        dist = np.sqrt(dx ** 2 + dy ** 2)
+        time = np.diff(self.prev_data[1:, 1])
+        speed_over_dist = np.divide(dist ** 2, time)
+        mean_speed_over_dist = np.mean(speed_over_dist)
+        std_speed_over_dist = np.std(speed_over_dist)
+        min_speed_over_dist = np.min(speed_over_dist)
+        max_speed_over_dist = np.max(speed_over_dist)
+
+        return mean_speed_over_dist, std_speed_over_dist, min_speed_over_dist, max_speed_over_dist
+
+    def calculate_mean_acceleration(self):
+        mean_x_acc = self.prev_data[1:, 8].mean()
+        std_x_acc = self.prev_data[1:, 8].std()
+        min_x_acc = self.prev_data[1:, 8].min()
+        max_x_acc = self.prev_data[1:, 8].max()
+
+        mean_y_acc = self.prev_data[1:, 9].mean()
+        std_y_acc = self.prev_data[1:, 9].std()
+        min_y_acc = self.prev_data[1:, 9].min()
+        max_y_acc = self.prev_data[1:, 9].max()
+
+        mean_acc = self.prev_data[1:, 10].mean()
+        std_acc = self.prev_data[1:, 10].std()
+        min_acc = self.prev_data[1:, 10].min()
+        max_acc = self.prev_data[1:, 10].max()
+
+
 def sequence_maker(df):
     sequential_data = []
     prev_data = deque(maxlen=constants.SEQUENCE_LENGTH)
@@ -206,8 +290,10 @@ def sequence_maker(df):
             for k in range(1, constants.SEQUENCE_LENGTH):
                 # Calculate the length of the trajectory segment between the current and previous rows and add it to
                 # the list.
-                traj_length += np.sqrt((temp[k, 1] - temp[k - 1, 1]) ** 2 + (temp[k, 2] - temp[k - 1, 2]) ** 2)
+                length = np.sqrt((temp[k, 1] - temp[k - 1, 1]) ** 2 + (temp[k, 2] - temp[k - 1, 2]) ** 2)
                 path.append(traj_length)
+
+                traj_length += length
 
                 # Calculate the time and velocity differences between the current and previous rows.
                 dt = temp[k, 0] - temp[k - 1, 0]
@@ -259,11 +345,17 @@ def sequence_maker(df):
             max_smoothness = np.abs(d_smoothed_angle).max()
 
             elapsed_time = temp[-1, 0] - temp[0, 0]
+            # Calculate distance between start and end points
+
             distance = np.sqrt((temp[-1, 2] - temp[0, 2]) ** 2 + (temp[-1, 3] - temp[0, 3]) ** 2)
+
+            # Check if distance is not zero
             if distance != 0:
                 straightness = traj_length / distance
             else:
-                distance = np.sqrt((temp[-1, 2] - temp[0, 2]) ** 2 + (temp[-1, 3] - temp[0, 3]) ** 2)
+                # If distance is zero, recalculate distance to avoid division by zero
+                traj_length = traj_length - length
+                distance = np.sqrt((temp[-2, 2] - temp[0, 2]) ** 2 + (temp[-2, 3] - temp[0, 3]) ** 2)
                 straightness = traj_length / distance
 
             for jj in [[mean_x_speed, mean_y_speed, mean_speed, mean_x_acc, mean_y_acc, mean_acc,
@@ -300,7 +392,9 @@ def sequence_maker(df):
     df.insert(0, 'ID', ID)
     df.fillna(0)
     # print(f"Head: {df.head()} \nSize: {df.size} \nShape {df.shape} \nColumn Names: {df.columns}")
-    df.to_csv(f"synth_data/extracted_features_seq_{constants.SEQUENCE_LENGTH}/user_{ID}_extracted_{constants.SEQUENCE_LENGTH}.csv", index=False)
+    df.to_csv(
+        f"synth_data/extracted_features_seq_{constants.SEQUENCE_LENGTH}/user_{ID}_extracted_{constants.SEQUENCE_LENGTH}.csv",
+        index=False)
     return df
 
 
