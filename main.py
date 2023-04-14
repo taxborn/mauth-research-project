@@ -43,7 +43,7 @@ def main():
         # Loop through the subjects
         for subject in range(constants.SUBJECTS):
             # Create the train/test split for the current subject. This creates a binary classifier.
-            X_train, X_test, y_train, y_test = preprocess.process(constants.FEATURE_FILE, subject)
+            X_train, X_test, y_train, y_test = preprocess.binary_classify(constants.FEATURE_FILE, subject)
             predictions = None
             model_name = None
             clf = None

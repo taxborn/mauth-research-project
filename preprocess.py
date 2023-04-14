@@ -14,7 +14,8 @@ def get_negative_data(dataset: pd.DataFrame, subject: int, num_of_samples: int) 
     """
     Get a specified number of samples from other users. This will take a random sample from ALL the other
     subjects in the dataset. If you are targeting subject 7 who had 60907 events, it will take 60907
-    events from other subjects, there might be some data from subject 1, 2, 8, etc..
+    events from other subjects, there might be some data from subject 1, 2, 8, etc.. (this number of imposter 
+    events can vary based upon the value of constants.SPLIT).
 
     :param dataset: The dataset to take from
     :param subject: The current subject (to not take from)
@@ -27,14 +28,14 @@ def get_negative_data(dataset: pd.DataFrame, subject: int, num_of_samples: int) 
     return dataset[other].sample(num_of_samples, random_state=constants.RANDOM_STATE_CONSTANT)
 
 
-def process(feature_file: str, subject: int):
+def binary_classify(feature_file: str, subject: int):
     """
-    Process a given CSV and subject into a split where total data is from the 'genuine' or selected subject,
+    Classify a given CSV and subject into a split where total data is from the 'genuine' or selected subject,
     and 50% of the data is a random sample from all the other subjects (excluding the genuine user).
 
     :return: X_train, X_val, y_train, y_val, for use in training models
     """
-    print(f"> Starting processing for subject {subject}")
+    print(f"> Starting binary classification for subject {subject}")
     start = time.time()
     dataset = pd.read_csv(feature_file)
     # Select only the relevant features we want from the constants file
@@ -51,8 +52,10 @@ def process(feature_file: str, subject: int):
     array_positive = copy.deepcopy(current_subject_data.values)
     array_positive[:, 0] = 1
 
+    # Calculate the number of negative events we want to take
+    negative_events = int(current_subject_data.shape[0] / (constants.SPLIT - 1))
     # Get the other subjects' data, and update the 'ID' part to 0
-    other_subject_data = get_negative_data(df, subject, int(current_subject_data.shape[0] / (constants.SPLIT - 1)))
+    other_subject_data = get_negative_data(df, subject, negative_events)
     array_negative = copy.deepcopy(other_subject_data.values)
     array_negative[:, 0] = 0
 
@@ -66,7 +69,7 @@ def process(feature_file: str, subject: int):
     X = mixed_set[:, 1:]  # All the features
     y = mixed_set[:, 0]  # The subject ID is the first column
 
-    print(f"> Finished processing for subject {subject}. Took {round(time.time() - start, constants.NUM_ROUNDING)}s")
+    print(f"> Finished classification for subject {subject}. Took {round(time.time() - start, constants.NUM_ROUNDING)}s")
     # Return the split with constants defined at the top of the file
     return train_test_split(X, y, test_size=constants.TEST_SPLIT, random_state=constants.RANDOM_STATE_CONSTANT)
 
@@ -98,7 +101,6 @@ def data_to_df(file_path):
     df['Ang_V'] = (df.Path_Tangent - df.Path_Tangent.shift(1)) / (df.Timestamp - df.Timestamp.shift(1))
     # Fill empty data with 0
     df.fillna(0, inplace=True)
-    # print(f"Size: {df.size} \nShape {df.shape} \nColumn Names: {df.columns}")
     df = sequence_maker(df)
     return df
 
@@ -107,21 +109,15 @@ def sequence_maker(df):
     sequential_data = []
     prev_data = deque(maxlen=constants.SEQUENCE_LENGTH)
     count = 0
+
     # Save ID
     ID = int(df.iloc[1]['ID'])
-    # calculate the average of the 'values' column while omitting zeros
-    button_non_zero_values = df.loc[df['Duration'] != 0, 'Duration']
-    press_avg = button_non_zero_values.mean()
 
-    for i in df.values:
-        # Append each even row in df to prev_data without 'Subject ID' column, up to 60 rows
-        prev_data.append([n for n in i[:-1]])
+    for raw_data_row in df.values:
+        # Append each even row in df to prev_data without 'Subject ID' column. We will do this until we have
+        prev_data.append([row for row in raw_data_row[1:]])
         if len(prev_data) == constants.SEQUENCE_LENGTH:
             temp = np.copy(prev_data)
-            for j in range(7, 14):
-                temp[0, j] = 0
-
-            button_press_time = temp[1: 4].max()
 
             x_values = temp[1:, 2]
             y_values = temp[1:, 3]
@@ -171,12 +167,12 @@ def sequence_maker(df):
             min_acc = temp[1:, 10].min()
             max_acc = temp[1:, 10].max()
 
-            acceleration = np.divide(np.divide(dist, time), time)
+            acceleration_over_dist = np.divide(np.divide(dist, time), dist)
 
-            mean_acceleration_over_dist = np.mean(acceleration)
-            std_acceleration_over_dist = np.std(acceleration)
-            min_acceleration_over_dist = np.min(acceleration)
-            max_acceleration_over_dist = np.max(acceleration)
+            mean_acceleration_over_dist = np.mean(acceleration_over_dist)
+            std_acceleration_over_dist = np.std(acceleration_over_dist)
+            min_acceleration_over_dist = np.min(acceleration_over_dist)
+            max_acceleration_over_dist = np.max(acceleration_over_dist)
 
             mean_jerk = temp[1:, 11].mean()
             std_jerk = temp[1:, 11].std()
@@ -193,7 +189,6 @@ def sequence_maker(df):
             min_tan = temp[1:, 13].min()
             max_tan = temp[1:, 13].max()
 
-            elapsed_time = temp[-1, 0] - temp[0, 0]
             # Initialize variables and data structures.
             curve_list = list()  # a list to store the curvature values for each segment of the trajectory
             traj_length = 0  # the total length of the trajectory
@@ -221,10 +216,10 @@ def sequence_maker(df):
                     flag = False
 
             # Loop through each segment of the trajectory.
-            for ii in range(1, len(path)):
+            for segment in range(1, len(path)):
                 # Calculate the distance and angle differences between the current and previous segments.
-                dp = path[ii] - path[ii - 1]
-                dangle = temp[ii, 12] - temp[ii - 1, 12]
+                dp = path[segment] - path[segment - 1]
+                dangle = temp[segment, 12] - temp[segment - 1, 12]
 
                 # Calculate the curvature of the segment and add it to the list.
                 curv = dangle / dp
@@ -240,13 +235,10 @@ def sequence_maker(df):
             min_curve = np.min(curve_list)
             max_curve = np.max(curve_list)
 
-            sum_of_angles = np.sum(temp[1:, 12])
-            # sharp_angles = np.sum(abs(temp[1:, 12]) < .0005)
-
             # Calculate smoothness
             t = temp[1:, 1]
-            # calculate angle
             dt = np.diff(t)
+            # calculate angle
             angle = temp[1:, 12]
             # smooth speed and angle
             smoothed_angle = savgol_filter(angle, window_length=5, polyorder=2, mode='mirror')
@@ -257,14 +249,6 @@ def sequence_maker(df):
             std_smoothness = np.abs(d_smoothed_angle).std()
             min_smoothness = np.abs(d_smoothed_angle).min()
             max_smoothness = np.abs(d_smoothed_angle).max()
-
-            elapsed_time = temp[-1, 0] - temp[0, 0]
-            distance = np.sqrt((temp[-1, 2] - temp[0, 2]) ** 2 + (temp[-1, 3] - temp[0, 3]) ** 2)
-            if distance != 0:
-                straightness = traj_length / distance
-            else:
-                distance = np.sqrt((temp[-1, 2] - temp[0, 2]) ** 2 + (temp[-1, 3] - temp[0, 3]) ** 2)
-                straightness = traj_length / distance
 
             for jj in [[mean_x_speed, mean_y_speed, mean_speed, mean_x_acc, mean_y_acc, mean_acc,
                         mean_jerk, mean_ang, mean_curve, mean_tan,
@@ -283,6 +267,7 @@ def sequence_maker(df):
         count += 1
         if count % 1000 == 0:
             print(count)
+
     df = pd.DataFrame(sequential_data,
                       columns=['mean_x_speed', 'mean_y_speed', 'mean_speed', 'mean_x_acc', 'mean_y_acc', 'mean_acc',
                                'mean_jerk', 'mean_ang', 'mean_curve', 'mean_tan',
@@ -297,10 +282,12 @@ def sequence_maker(df):
                                'std_acceleration_over_dist', 'max_acceleration_over_dist',
                                'min_acceleration_over_dist', 'mean_smoothness', 'std_smoothness', 'min_smoothness',
                                'max_smoothness', 'area_under_curve'])
+    # Re-insert the subject ID
     df.insert(0, 'ID', ID)
-    df.fillna(0)
-    # print(f"Head: {df.head()} \nSize: {df.size} \nShape {df.shape} \nColumn Names: {df.columns}")
+
+    # Save the subjects extracted features to their own CSV
     df.to_csv(f"synth_data/extracted_features_seq_{constants.SEQUENCE_LENGTH}/user_{ID}_extracted_{constants.SEQUENCE_LENGTH}.csv", index=False)
+
     return df
 
 
