@@ -11,7 +11,7 @@ SUBJECTS = 15
 MESSAGE_WIDTH = 53
 NUM_ROUNDING = 3
 # Which model(s) to run, either "dt", "rf", "knn", "svc"
-MODELS = ["knn"]
+MODELS = ["knn", "dt", "svc"]
 
 # -1 for all cores, otherwise specify number of cores. If you're unsure, either 1 or 4 should do well here.
 N_JOBS = -1
@@ -25,6 +25,7 @@ USE_GRIDSEARCH = False
 # here means 1/2 of the dataset would be imposter data. 3 would mean 1/3
 # is imposter data, and so on...
 SPLIT = 2
+# Allow verbose output. Causes weird outout for SVC since we do it in parallel
 VERBOSE = True
 
 """
@@ -49,5 +50,5 @@ If this is set to None, the models will use all of the features
 FEATURES = None
 # FEATURES = ["ID", "area_under_curve", "std_y_speed", "mean_y_speed", "std_smoothness", "mean_smoothness",
 #             "std_acceleration_over_dist", "std_curve", "mean_curve", "std_acc", "mean_acc"]
-FEATURE_FILE = f"./synth_data/user_all_features_SQ{SEQUENCE_LENGTH}.csv"
+FEATURE_FILE = f"./synth_data/user_all_features_SQ{SEQUENCE_LENGTH}_2.csv"
 RAW_FOLDER_PATH = f"./raw_data/"

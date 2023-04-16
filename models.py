@@ -157,6 +157,6 @@ def parallel_svc(subject: int):
     :param subject: The subject ID
     :return: None
     """
-    X_train, X_test, y_train, y_test = preprocess.process(constants.FEATURE_FILE, subject)
+    X_train, X_test, y_train, y_test = preprocess.binary_classify(constants.FEATURE_FILE, subject)
     y_pred, classifier = svc(X_train, X_test, y_train)
-    display_validations(X_test, y_test, y_pred, "SVC", subject, classifier)
+    return display_validations(X_test, y_test, y_pred, "SVC", subject, classifier)

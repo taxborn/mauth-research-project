@@ -262,8 +262,8 @@ def sequence_maker(df):
                         min_speed_over_dist, max_speed_over_dist, mean_acceleration_over_dist,
                         std_acceleration_over_dist, max_acceleration_over_dist, min_acceleration_over_dist,
                         mean_smoothness, std_smoothness, min_smoothness, max_smoothness, area_under_curve]]:
-                sequential_data.append(
-                    jj)  # Prev_data now contains SEQ_LEN amount of samples and can be appended as one batch of 60 for RNN
+                # Prev_data now contains SEQ_LEN amount of samples and can be appended as one batch
+                sequential_data.append(jj)
         count += 1
         if count % 1000 == 0:
             print(count)

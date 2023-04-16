@@ -21,10 +21,14 @@ def main():
         print(f"[Feature selection] Using the following features: {constants.FEATURES}")
     else:
         print(f"[Feature selection] Using all features generated in preprocessing.")
-    print(f"[Models used] {constants.MODELS}")
-    print(f"{' Starting Run ':-^{constants.MESSAGE_WIDTH}}\n")
+    print(f"[Models used]", end=" ")
+    for model in constants.MODELS:
+        print(f"{model}", end=" ")
+    print(f"\n{' Starting Run ':-^{constants.MESSAGE_WIDTH}}\n")
 
     for model in constants.MODELS:
+        model_roc_validations = []
+
         # SVC is single threaded, we can utilize the multiprocessing package to parallelize this. This is separate from
         # the other loop since we don't want to run this per-subject, we want this to be handled by the multiprocessing
         # package. If we are using GRIDSEARCH, we don't want to parallelize this since we want to use more resources for
@@ -33,12 +37,10 @@ def main():
         if model == "svc" and not constants.USE_GRIDSEARCH:
             pool = multiprocessing.Pool(processes=10)
             subjects_to_process = range(constants.SUBJECTS)
-            pool.map(models.parallel_svc, subjects_to_process)
+            model_roc_validations = pool.map(models.parallel_svc, subjects_to_process)
             pool.close()
             pool.join()
             continue
-
-        model_roc_validations = []
 
         # Loop through the subjects
         for subject in range(constants.SUBJECTS):

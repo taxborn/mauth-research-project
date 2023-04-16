@@ -15,7 +15,7 @@ def create_feature_file():
 
     :return: None
     """
-    subject_data = glob.glob(f"synth_data/extracted_features_seq_{constants.SEQUENCE_LENGTH}/*.csv")
+    subject_data = glob.glob(f"synth_data/extracted_features_seq_{constants.SEQUENCE_LENGTH}_2/*.csv")
     subject_data.sort()  # glob lacks reliable ordering, so impose your own if output order matters
 
     # Check if the feature file exists already to avoid accidental overwrites. If the user doesn't answer
