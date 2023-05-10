@@ -1,9 +1,9 @@
 # :mouse: mAuth Mouse Machine Learning
-*TODO:* Link conference/journal paper
+**Conference Paper:** [ConferencePaper.pdf](./ConferencePaper.pdf)
 
 This project involves the development of a proof of concept model using 
 computer mouse data that could potentially be used in an authentication 
-scheme. The model uses KNN, SVM, and decision tree algorithms to analyze 
+scheme. The model uses **KNN**, **SVM** (SVC), and **decision tree** algorithms to analyze 
 data such as mouse position, time of the event, and button press duration. 
 The goal is to determine if this data can be used to accurately identify a 
 user and differentiate them from potential imposters. By exploring the 
@@ -13,8 +13,7 @@ to contribute to the growing field of biometric authentication research.
 # :floppy_disk: Data collection
 - The **raw** dataset is located in the [./raw_data/](./raw_data) folder
   - The same subjects with their extracted features are in the [./synth_data/extracted_features_data/](./synth_data/extracted_features_data) folder
-- A file with all subject data can be found at [./synth_data/user_all_data.csv](./synth_data/user_all_data.csv).*
-  - Similarly, a file with all of the subjects' extracted features will be in [./synth_data/user_all_feature_data.csv](./synth_data/user_all_feature_data.csv)
+- To extract the features, the raw data needs to be processed from [preprocessing.py](./preprocessing.py).
 
 Data collection is done within [collection.py](./collection.py), which utilizes the 
 [pynput](https://pypi.org/project/pynput/) library to collect mouse input data. Specifically, 
